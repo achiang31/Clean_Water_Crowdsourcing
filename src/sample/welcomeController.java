@@ -32,8 +32,14 @@ public class welcomeController {
     }
 
     @FXML
-    private void registerClick(ActionEvent event) {
-        //open registration screen
+    private void registerClick(ActionEvent event) throws IOException {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent application = FXMLLoader.load(getClass().getResource("registration.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(application);
+        stage.setScene(scene);
+        stage.setTitle("Login Screen");
+        stage.show();
     }
 
 
