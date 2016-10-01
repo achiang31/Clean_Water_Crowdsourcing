@@ -31,15 +31,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label text="Name:" GridPane.rowIndex="1">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="25.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="ID:" GridPane.rowIndex="2">
+      <Label text="Username:" GridPane.rowIndex="2">
          <font>
             <Font size="18.0" />
          </font>
@@ -55,7 +47,7 @@
             <Insets left="25.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Account Type:" GridPane.rowIndex="4">
+      <Label text="Confirm Password:" GridPane.rowIndex="4">
          <font>
             <Font size="18.0" />
          </font>
@@ -63,32 +55,40 @@
             <Insets left="25.0" />
          </GridPane.margin>
       </Label>
-      <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Label text="Account Type:" GridPane.rowIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="25.0" />
+         </GridPane.margin>
+      </Label>
+      <Button fx:id="register" mnemonicParsing="false" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="25.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="cancel" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </Button>
-      <TextField GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+      <TextField fx:id="username" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </TextField>
-      <TextField GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="25.0" />
-         </GridPane.margin>
-      </TextField>
-      <ComboBox prefHeight="27.0" prefWidth="412.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+      <ComboBox fx:id="accountTypeBox" prefHeight="27.0" prefWidth="412.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </ComboBox>
-      <PasswordField GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+      <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="25.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <PasswordField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>

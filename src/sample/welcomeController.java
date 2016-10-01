@@ -38,7 +38,7 @@ public class welcomeController {
         Stage stage = new Stage();
         Scene scene = new Scene(application);
         stage.setScene(scene);
-        stage.setTitle("Login Screen");
+        stage.setTitle("Registration Screen");
         stage.show();
     }
 
