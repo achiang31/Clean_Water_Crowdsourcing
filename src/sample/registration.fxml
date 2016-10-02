@@ -93,5 +93,13 @@
             <Insets right="25.0" />
          </GridPane.margin>
       </PasswordField>
+      <Label fx:id="registerMessage" GridPane.columnSpan="2" GridPane.rowIndex="5">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="25.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>

@@ -32,6 +32,20 @@ public class loginController {
     @FXML
     private Button cancel;
 
+//    @FXML
+//    private void loginAction(ActionEvent event) throws IOException {
+//        if (username.getText().equals("username") && password.getText().equals("password")) {
+//            ((Node) (event.getSource())).getScene().getWindow().hide();
+//            Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
+//            Stage stage = new Stage();
+//            Scene scene = new Scene(application);
+//            stage.setScene(scene);
+//            stage.setTitle("Application");
+//            stage.show();
+//        } else {
+//            loginMessage.setText("Invalid Login Credentials");
+//        }
+//    }
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         if (username.getText().equals("username") && password.getText().equals("password")) {
