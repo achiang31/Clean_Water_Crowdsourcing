@@ -2,7 +2,6 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,8 +45,6 @@ public class registrationController {
             AccountType.US.getAccountType(), AccountType.WK.getAccountType(),
             AccountType.MN.getAccountType(), AccountType.AD.getAccountType());
 
-    ObservableMap<String, String> users = FXCollections.observableHashMap();
-
     @FXML
     private void initialize() {
         accountTypeBox.setItems(accountTypeList);
@@ -56,13 +53,13 @@ public class registrationController {
     @FXML
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
-            users.put(username.getText(), password.getText());
+            WaterApplication.addUser(username.getText(), password.getText());
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(application);
             stage.setScene(scene);
-            stage.setTitle("Application");
+            stage.setTitle("WaterApplication");
             stage.show();
         }
     }
@@ -81,10 +78,10 @@ public class registrationController {
     private boolean isInputValid() {
         String errorMessage = "";
         if (accountTypeBox.getValue() == null) {
-            errorMessage += "Account type not selected!\n";
+            errorMessage += "Empty account type!\n";
         } else if (username.getText() == null || username.getText().length() == 0) {
             errorMessage += "Not a valid username!\n";
-        } else if (users.containsKey(username.getText())) {
+        } else if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())) {
             errorMessage += "Username already exists!\n";
         } else if (password.getText() == null || password.getText().length() == 0) {
             errorMessage += "Not a valid password!\n";

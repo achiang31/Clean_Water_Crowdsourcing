@@ -40,7 +40,7 @@ public class loginController {
 //            Stage stage = new Stage();
 //            Scene scene = new Scene(application);
 //            stage.setScene(scene);
-//            stage.setTitle("Application");
+//            stage.setTitle("WaterApplication");
 //            stage.show();
 //        } else {
 //            loginMessage.setText("Invalid Login Credentials");
@@ -48,13 +48,14 @@ public class loginController {
 //    }
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
-        if (username.getText().equals("username") && password.getText().equals("password")) {
+        if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
+                && WaterApplication.getUsers().get(username.getText()).equals(password.getText())) {
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(application);
             stage.setScene(scene);
-            stage.setTitle("Application");
+            stage.setTitle("WaterApplication");
             stage.show();
         } else {
             loginMessage.setText("Invalid Login Credentials");
