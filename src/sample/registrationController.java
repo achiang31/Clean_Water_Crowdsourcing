@@ -45,11 +45,19 @@ public class registrationController {
             AccountType.US.getAccountType(), AccountType.WK.getAccountType(),
             AccountType.MN.getAccountType(), AccountType.AD.getAccountType());
 
+    /**
+     * Set items in Account Type ComboBox to account types
+     */
     @FXML
     private void initialize() {
         accountTypeBox.setItems(accountTypeList);
     }
 
+    /**
+     * Handle when "Register" button is pressed --> save user information --> display Water Application
+     * @param event Clicking "Register" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -65,6 +73,11 @@ public class registrationController {
         }
     }
 
+    /**
+     * Handle when "Cancel" button is pressed --> don't save user information --> display Welcome screen
+     * @param event Clicking "Cancel" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -76,6 +89,10 @@ public class registrationController {
         stage.show();
     }
 
+    /**
+     * Test if user input for profile is valid, if not, display error message on screen
+     * @return if input is valid or not
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (accountTypeBox.getValue() == null) {

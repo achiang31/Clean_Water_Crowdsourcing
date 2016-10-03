@@ -32,6 +32,12 @@ public class loginController {
     @FXML
     private Button cancel;
 
+    /**
+     * Handle when "Login" button is pressed --> display Water Application if login credentials are correct
+     * Otherwise display error message
+     * @param event Clicking "Login" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
@@ -49,6 +55,11 @@ public class loginController {
         }
     }
 
+    /**
+     * Handle when "Cancel" button is pressed --> display Welcome screen
+     * @param event Clicking "Cancel" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
