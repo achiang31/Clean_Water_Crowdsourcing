@@ -26,6 +26,7 @@ public class applicationController {
 
     @FXML
     private void editProfileAction(ActionEvent event) throws IOException {
+        profileController.setUsername(username);
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
         Stage stage = new Stage();
@@ -33,7 +34,6 @@ public class applicationController {
         stage.setScene(scene);
         stage.setTitle("Profile");
         stage.show();
-        profileController.setUsername(username);
     }
 
     @FXML

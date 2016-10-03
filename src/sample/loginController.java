@@ -36,6 +36,7 @@ public class loginController {
     private void loginAction(ActionEvent event) throws IOException {
         if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
                 && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
+            applicationController.setUsername(username.getText());
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
@@ -43,7 +44,6 @@ public class loginController {
             stage.setScene(scene);
             stage.setTitle("Application");
             stage.show();
-            applicationController.setUsername(username.getText());
         } else {
             loginMessage.setText("Invalid Login Credentials");
         }

@@ -53,6 +53,7 @@ public class registrationController {
     @FXML
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
+            profileController.setUsername(username.getText());
             WaterApplication.addUser((String) accountTypeBox.getValue(), username.getText(), password.getText());
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
@@ -61,7 +62,6 @@ public class registrationController {
             stage.setScene(scene);
             stage.setTitle("Profile");
             stage.show();
-            profileController.setUsername(username.getText());
         }
     }
 

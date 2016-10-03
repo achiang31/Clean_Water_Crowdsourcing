@@ -17,7 +17,9 @@ public class WaterApplication {
     }
 
     public static void setProfile(String username, Profile profile) {
-        users.get(username).setProfile(profile);
+        if (users.get(username) != null){
+            users.get(username).setProfile(profile);
+        }
     }
 
     public static ObservableMap<String, User> getUsers() {
