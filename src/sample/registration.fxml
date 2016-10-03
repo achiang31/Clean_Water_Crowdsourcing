@@ -63,26 +63,24 @@
             <Insets left="25.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="register" mnemonicParsing="false" onAction="#registerAction" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Label fx:id="registerMessage" GridPane.columnSpan="2" GridPane.rowIndex="5">
+         <font>
+            <Font size="18.0" />
+         </font>
          <GridPane.margin>
             <Insets left="25.0" />
          </GridPane.margin>
-      </Button>
-      <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      </Label>
+      <ComboBox fx:id="accountTypeBox" prefHeight="27.0" prefWidth="445.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
-      </Button>
+      </ComboBox>
       <TextField fx:id="username" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </TextField>
-      <ComboBox fx:id="accountTypeBox" prefHeight="27.0" prefWidth="412.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets right="25.0" />
-         </GridPane.margin>
-      </ComboBox>
       <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="25.0" />
@@ -93,13 +91,15 @@
             <Insets right="25.0" />
          </GridPane.margin>
       </PasswordField>
-      <Label fx:id="registerMessage" GridPane.columnSpan="2" GridPane.rowIndex="5">
-         <font>
-            <Font size="18.0" />
-         </font>
+      <Button fx:id="register" mnemonicParsing="false" onAction="#registerAction" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="25.0" />
          </GridPane.margin>
-      </Label>
+      </Button>
+      <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets right="25.0" />
+         </GridPane.margin>
+      </Button>
    </children>
 </GridPane>
