@@ -57,6 +57,9 @@ public class profileController {
 
     private Date birthday;
 
+    /**
+     * Get and display the Profile of current user
+     */
     @FXML
     private void initialize() {
         Profile profile = WaterApplication.getUsers().get(username).getProfile();
@@ -72,6 +75,12 @@ public class profileController {
         }
     }
 
+    /**
+     *
+     * Handle when "OK" button is pressed --> save changes to profile --> display Water Application
+     * @param event Clicking "OK" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void OKAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -89,6 +98,11 @@ public class profileController {
         }
     }
 
+    /**
+     * Handle when "Cancel" button is pressed --> don't save changes to profile --> display Water Application
+     * @param event Clicking "Cancel" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         applicationController.setUsername(username);
@@ -101,6 +115,10 @@ public class profileController {
         stage.show();
     }
 
+    /**
+     * Test if user input for profile is valid, if not, display error message on screen
+     * @return if input is valid or not
+     */
     private boolean isInputValid() {
         String errorMessageStr = "";
         if (firstName.getText() == null || firstName.getText().length() == 0) {
@@ -134,6 +152,10 @@ public class profileController {
         }
     }
 
+    /**
+     * Set the username to that of current user operating the application
+     * @param _username username of current user
+     */
     public static void setUsername(String _username) {
         username = _username;
     }

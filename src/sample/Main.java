@@ -18,6 +18,10 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Method to run the Water Application
+     * @param args Argument array passed in when calling main method
+     */
     public static void main(String[] args) {
         launch(args);
     }

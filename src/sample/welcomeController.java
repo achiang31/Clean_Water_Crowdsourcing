@@ -20,6 +20,11 @@ public class welcomeController {
     @FXML
     private Button login;
 
+    /**
+     * Handle when "Login" button is pressed --> display Login screen
+     * @param event Clicking "Login" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void loginClick(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -31,6 +36,11 @@ public class welcomeController {
         stage.show();
     }
 
+    /**
+     * Handle when "Register" button is pressed --> display Register screen
+     * @param event Clicking "Register" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void registerClick(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
