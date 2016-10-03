@@ -18,4 +18,28 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

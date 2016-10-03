@@ -17,7 +17,21 @@ import java.io.IOException;
  */
 public class applicationController {
     @FXML
+    private Button editProfile;
+
+    @FXML
     private Button logoff;
+
+    @FXML
+    private void editProfileAction(ActionEvent event) throws IOException {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(application);
+        stage.setScene(scene);
+        stage.setTitle("Profile");
+        stage.show();
+    }
 
     @FXML
     private void logoffAction(ActionEvent event) throws IOException {

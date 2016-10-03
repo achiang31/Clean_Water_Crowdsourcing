@@ -9,13 +9,14 @@ import javafx.collections.ObservableMap;
  */
 public class WaterApplication {
 
-    private static ObservableMap<String, String> users = FXCollections.observableHashMap();
+    private static ObservableMap<String, User> users = FXCollections.observableHashMap();
 
-    public static void addUser(String username, String password) {
-        users.put(username, password);
+    public static void addUser(String accountType, String username, String password) {
+        User newUser = new User(accountType, username, password);
+        users.put(username,newUser);
     }
 
-    public static ObservableMap<String, String> getUsers() {
+    public static ObservableMap<String, User> getUsers() {
         return users;
     }
 }
