@@ -47,25 +47,26 @@
             <Insets left="25.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="username" prefHeight="31.0" prefWidth="394.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label fx:id="loginMessage" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="username" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </TextField>
-      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Log In" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="25.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <Button fx:id="login" mnemonicParsing="false" onAction="#loginAction" text="Login" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="25.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
       </Button>
-      <PasswordField fx:id="password" prefHeight="31.0" prefWidth="446.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="25.0" />
-         </GridPane.margin></PasswordField>
-      <Label fx:id="loginMessage" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    </children>
 </GridPane>

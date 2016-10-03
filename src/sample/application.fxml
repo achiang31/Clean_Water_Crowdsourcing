@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:controller="sample.applicationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.applicationController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="277.0" />
@@ -29,9 +29,14 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="logoff" mnemonicParsing="false" onAction="#logoffAction" text="Log Off" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Button fx:id="logoff" mnemonicParsing="false" onAction="#logoffAction" text="Log Off" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="25.0" />
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="editProfile" mnemonicParsing="false" onAction="#editProfileAction" text="Edit Profile" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="20.0" />
          </GridPane.margin>
       </Button>
    </children>
