@@ -55,12 +55,13 @@ public class registrationController {
         if (isInputValid()) {
             WaterApplication.addUser((String) accountTypeBox.getValue(), username.getText(), password.getText());
             ((Node) (event.getSource())).getScene().getWindow().hide();
-            Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
+            Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(application);
             stage.setScene(scene);
-            stage.setTitle("WaterApplication");
+            stage.setTitle("Profile");
             stage.show();
+            profileController.setUsername(username.getText());
         }
     }
 

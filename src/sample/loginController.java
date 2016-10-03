@@ -43,6 +43,7 @@ public class loginController {
             stage.setScene(scene);
             stage.setTitle("Application");
             stage.show();
+            applicationController.setUsername(username.getText());
         } else {
             loginMessage.setText("Invalid Login Credentials");
         }

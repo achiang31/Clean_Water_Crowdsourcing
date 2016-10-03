@@ -16,6 +16,10 @@ public class WaterApplication {
         users.put(username,newUser);
     }
 
+    public static void setProfile(String username, Profile profile) {
+        users.get(username).setProfile(profile);
+    }
+
     public static ObservableMap<String, User> getUsers() {
         return users;
     }

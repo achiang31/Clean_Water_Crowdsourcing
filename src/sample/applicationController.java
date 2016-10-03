@@ -22,6 +22,8 @@ public class applicationController {
     @FXML
     private Button logoff;
 
+    private static String username;
+
     @FXML
     private void editProfileAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -31,6 +33,7 @@ public class applicationController {
         stage.setScene(scene);
         stage.setTitle("Profile");
         stage.show();
+        profileController.setUsername(username);
     }
 
     @FXML
@@ -42,6 +45,10 @@ public class applicationController {
         stage.setScene(scene);
         stage.setTitle("Welcome");
         stage.show();
+    }
+
+    public static void setUsername(String _username) {
+        username = _username;
     }
 }
 
