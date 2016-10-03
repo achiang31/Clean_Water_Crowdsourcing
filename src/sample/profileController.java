@@ -90,6 +90,7 @@ public class profileController {
 
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
+        applicationController.setUsername(username);
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
         Stage stage = new Stage();
