@@ -30,6 +30,16 @@ public class Profile {
                 Integer.parseInt(month) - 1, Integer.parseInt(day));
     }
 
+    public Profile(String firstName, String lastName, String emailAddress, String ID,
+                   String homeAddress, Date birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.ID = ID;
+        this.homeAddress = homeAddress;
+        this.birthday = birthday;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
