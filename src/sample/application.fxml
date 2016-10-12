@@ -39,5 +39,15 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
+      <Button fx:id="createReports" mnemonicParsing="false" onAction="#createReportsAction" text="Create Reports" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="viewReports" mnemonicParsing="false" onAction="#viewReportsAction" text="View Reports" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Button>
    </children>
 </GridPane>
