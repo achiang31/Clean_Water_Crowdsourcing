@@ -24,6 +24,11 @@ public class applicationController {
 
     private static String username;
 
+    /**
+     * Handle when "Edit Profile" button is pressed --> display Profile of the current user
+     * @param event Clicking "Edit Profile" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void editProfileAction(ActionEvent event) throws IOException {
         profileController.setUsername(username);
@@ -36,6 +41,11 @@ public class applicationController {
         stage.show();
     }
 
+    /**
+     * Handle when "Log Off" button is pressed --> end current user session --> display Welcome screen
+     * @param event Clicking "Log Off" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void logoffAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -47,6 +57,10 @@ public class applicationController {
         stage.show();
     }
 
+    /**
+     * Set the username to that of current user operating the application
+     * @param _username username of current user
+     */
     public static void setUsername(String _username) {
         username = _username;
     }
