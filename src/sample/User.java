@@ -13,7 +13,6 @@ public class User {
 
     private Profile profile;
 
-    private Report report;
 
     /**
      * Create an User object
@@ -75,15 +74,4 @@ public class User {
         this.profile = profile;
     }
 
-    /**
-     * Set the report of user
-     * @param report report for the user
-     */
-    public void setReport(Report report) { this.report = report;}
-
-    /**
-     * Get the report of user
-     * @return user's report
-     */
-    public Report getReport() { return report;}
 }

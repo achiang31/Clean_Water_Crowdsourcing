@@ -37,6 +37,12 @@ public class uneditableReportController {
     @FXML
     private Label date;
 
+    @FXML
+    private Label type;
+
+    @FXML
+    private Label condition;
+
     private Profile profile;
 
     private Report report;
@@ -51,7 +57,9 @@ public class uneditableReportController {
         loc.setText(report.getLocation());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(reportViewController.getReportNum()));
-        dateAndTime.setText(report.getDateAndTime());
+        dateAndTime.setText(report.getDateAndTime().toString());
+        type.setText(report.getType().toString());
+        condition.setText(report.getCondition().toString());
     }
 
     /**

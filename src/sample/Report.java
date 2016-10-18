@@ -1,4 +1,8 @@
 package sample;
+
+import javafx.beans.property.StringProperty;
+import java.util.Date;
+
 /**
  * Created by xingxing on 10/5/16.
  */
@@ -7,7 +11,9 @@ public class Report {
     private String reporter;
     private int reportNum;
     private String location;
-    private String dateAndTime;
+    private Date dateAndTime;
+    private Type type;
+    private Condition condition;
 
     /**
      * Create a new Report object for user
@@ -36,7 +42,7 @@ public class Report {
      * Get the dateAndTime of the report
      * @return dateAndTime in the report
      */
-    public String getDateAndTime() {
+    public Date getDateAndTime() {
         return dateAndTime;
     }
 
@@ -44,7 +50,7 @@ public class Report {
      * Set the dateAndTime for the report
      * @param dateAndTime dateAndTime for the report
      */
-    public void setDateAndTime(String dateAndTime) {
+    public void setDateAndTime(Date dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
@@ -86,6 +92,29 @@ public class Report {
         this.reportNum = reportNum;
     }
 
+    /**
+     * Get the condition of the report
+     * @return condition in the report
+     */
+    public Condition getCondition() {
+        return condition;
+    }
+
+    /**
+     * set the condition of the report
+     * @param condition in the report
+     */
+    public void setCondition(String condition) {
+        this.condition = Condition.valueOf(condition);
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = Type.valueOf(type);
+    }
     /**
      * over write the toString for report class to
      * return the report number of a report

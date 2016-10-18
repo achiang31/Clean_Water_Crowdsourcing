@@ -36,6 +36,12 @@ public class reportController {
     @FXML
     private Label errorMessage;
 
+    @FXML
+    private ToggleGroup TypeGroup;
+
+    @FXML
+    private ToggleGroup ConditionGroup;
+
     private static String username;
 
     public static int reportNum;
@@ -67,8 +73,12 @@ public class reportController {
             reportNum++;
             Report report = WaterApplication.addReport(loc.getText());
             report.setUserProfile(profile);
-            report.setDateAndTime(dateAndTime.getText());
+            report.setDateAndTime(date);
             report.setReportNum(reportNum);
+            RadioButton typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
+            report.setType(typeButton.getText().toUpperCase());
+            RadioButton conditionButton = (RadioButton) ConditionGroup.getSelectedToggle();
+            report.setCondition((conditionButton.getText().toUpperCase()));
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
