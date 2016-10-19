@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +22,12 @@ public class applicationController {
 
     @FXML
     private Button logoff;
+
+    @FXML
+    private Button createReports;
+
+    @FXML
+    private Button viewReports;
 
     private static String username;
 
@@ -41,6 +48,7 @@ public class applicationController {
         stage.show();
     }
 
+
     /**
      * Handle when "Log Off" button is pressed --> end current user session --> display Welcome screen
      * @param event Clicking "Log Off" button
@@ -54,6 +62,39 @@ public class applicationController {
         Scene scene = new Scene(application);
         stage.setScene(scene);
         stage.setTitle("Welcome");
+        stage.show();
+    }
+
+    /**
+     * Handle when "createReports" button is pressed --> end current user session --> display Reports screen
+     * @param event Clicking "createReports" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
+    @FXML
+    private void createReportsAction(ActionEvent event) throws IOException {
+        reportController.setUsername(username);
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent report = FXMLLoader.load(getClass().getResource("report.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(report);
+        stage.setScene(scene);
+        stage.setTitle("Report");
+        stage.show();
+    }
+    /**
+     * Handle when "viewReports" button is pressed --> end current user session --> display Reports screen
+     * @param event Clicking "viewReports" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
+    @FXML
+    private void viewReportsAction(ActionEvent event) throws IOException {
+        reportController.setUsername(username);
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent report = FXMLLoader.load(getClass().getResource("viewReports.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(report);
+        stage.setScene(scene);
+        stage.setTitle("Report");
         stage.show();
     }
 

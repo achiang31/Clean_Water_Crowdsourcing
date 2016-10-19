@@ -13,6 +13,7 @@ public class User {
 
     private Profile profile;
 
+
     /**
      * Create an User object
      * @param accountType Account type of user
@@ -72,4 +73,5 @@ public class User {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
 }
