@@ -29,6 +29,9 @@ public class applicationController {
     @FXML
     private Button viewReports;
 
+    @FXML
+    private Button availabilityButton;
+
     private static String username;
 
     /**
@@ -95,6 +98,17 @@ public class applicationController {
         Scene scene = new Scene(report);
         stage.setScene(scene);
         stage.setTitle("Report");
+        stage.show();
+    }
+
+    @FXML
+    private void viewAvailabilityButton(ActionEvent event) throws IOException {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent report = FXMLLoader.load(getClass().getResource("mapview.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(report);
+        stage.setScene(scene);
+        stage.setTitle("Map");
         stage.show();
     }
 
