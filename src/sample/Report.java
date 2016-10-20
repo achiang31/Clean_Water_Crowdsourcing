@@ -10,7 +10,7 @@ public class Report {
     private Profile userProfile;
     private String reporter;
     private int reportNum;
-    private String location;
+    private Location location;
     private Date dateAndTime;
     private Type type;
     private Condition condition;
@@ -20,7 +20,7 @@ public class Report {
      * @param location location where u examine the water
      */
 
-    public Report(String location) {
+    public Report(Location location) {
         this.location = location;
     }
 
@@ -58,7 +58,7 @@ public class Report {
      * Get the location of the report
      * @return location in the report
      */
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -66,7 +66,7 @@ public class Report {
      * Set the location for the report
      * @param location location for the report
      */
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

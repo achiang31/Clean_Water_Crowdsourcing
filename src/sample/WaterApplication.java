@@ -26,7 +26,7 @@ public class WaterApplication {
      * Add a new user to report list
      * @param location location of the report
      */
-    public static Report addReport(String location) {
+    public static Report addReport(Location location) {
         Report newReport = new Report(location);
         reports.put(reportController.reportNum,newReport);
         reportList.add(newReport);
