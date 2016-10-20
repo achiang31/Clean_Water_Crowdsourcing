@@ -17,7 +17,6 @@
   <rowConstraints>
     <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="228.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
@@ -29,24 +28,21 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="logoff" mnemonicParsing="false" onAction="#logoffAction" text="Log Off" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button fx:id="createReports" mnemonicParsing="false" onAction="#createReportsAction" text="Create Reports" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="viewReports" mnemonicParsing="false" onAction="#viewReportsAction" text="View Reports" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets right="20.0" />
+            <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="editProfile" mnemonicParsing="false" onAction="#editProfileAction" text="Edit Profile" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <Button fx:id="availabilityButton" mnemonicParsing="false" onAction="#viewAvailabilityAction" text="View Availability" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="editProfile" mnemonicParsing="false" onAction="#editProfileAction" text="Edit Profile" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="createReports" mnemonicParsing="false" onAction="#createReportsAction" text="Create Reports" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <Button fx:id="logoff" mnemonicParsing="false" onAction="#logoffAction" text="Log Off" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="20.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="viewReports" mnemonicParsing="false" onAction="#viewReportsAction" text="View Reports" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets />
          </GridPane.margin>
       </Button>
    </children>

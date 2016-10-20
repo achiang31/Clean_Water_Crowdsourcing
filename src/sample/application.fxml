@@ -34,7 +34,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="availabilityButton" mnemonicParsing="false" text="View Availability" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="availabilityButton" mnemonicParsing="false" onAction="#viewAvailabilityAction" text="View Availability" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Button fx:id="editProfile" mnemonicParsing="false" onAction="#editProfileAction" text="Edit Profile" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />

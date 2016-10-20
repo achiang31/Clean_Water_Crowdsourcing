@@ -102,7 +102,7 @@ public class applicationController {
     }
 
     @FXML
-    private void viewAvailabilityButton(ActionEvent event) throws IOException {
+    private void viewAvailabilityAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent report = FXMLLoader.load(getClass().getResource("mapview.fxml"));
         Stage stage = new Stage();

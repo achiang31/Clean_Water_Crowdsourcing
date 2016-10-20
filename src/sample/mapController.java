@@ -28,17 +28,17 @@ public class mapController implements Initializable, MapComponentInitializedList
 
     private Window mainStage;
 
-    private MainFXApplication theApp;
+//    private MainFXApplication theApp;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
     }
 
-    public void setCallbacks(Window stage, MainFXApplication app) {
-        mainStage = stage;
-        theApp = app;
-    }
+//    public void setCallbacks(Window stage, MainFXApplication app) {
+//        mainStage = stage;
+//        theApp = app;
+//    }
 
 
     @Override
@@ -47,7 +47,10 @@ public class mapController implements Initializable, MapComponentInitializedList
 
         //set up the center location for the map
         LatLong center = new LatLong(34, -88);
-
+        if (!WaterApplication.getReportsList().isEmpty()) {
+            Location firstLoc = WaterApplication.getReportsList().get(0).getLocation();
+            center = new LatLong(firstLoc.getLatitude(), firstLoc.getLongitude());
+        }
         options.center(center)
                 .zoom(9)
                 .overviewMapControl(false)
@@ -62,10 +65,11 @@ public class mapController implements Initializable, MapComponentInitializedList
 
 
         /** now we communciate with the model to get all the locations for markers */
-        Facade fc = Facade.getInstance();
-        List<Location> locations = fc.getLocations();
+//        Facade fc = Facade.getInstance();
+        List<Report> reports = WaterApplication.getReportsList();
 
-        for (Location l: locations) {
+        for (int i = 0; i < reports.size(); i++) {
+            Location l = reports.get(i).getLocation();
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(l.getLatitude(), l.getLongitude());
 
@@ -95,7 +99,7 @@ public class mapController implements Initializable, MapComponentInitializedList
     public void onOpenTextFileMenu() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Open Text File");
-        File file  = fc.showOpenDialog(mainStage);
+        File file = fc.showOpenDialog(mainStage);
         if (file != null)
             Facade.getInstance().loadModelFromText(file);
     }
@@ -147,7 +151,7 @@ public class mapController implements Initializable, MapComponentInitializedList
 
     @FXML
     public void onCloseMenu() {
-        theApp.closeMapView();
+//        theApp.closeMapView();
     }
 
 }

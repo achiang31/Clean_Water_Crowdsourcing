@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.reportController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.reportController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,6 +42,14 @@
          </RadialGradient>
       </textFill>
    </Label>
+   <Label text="Reporter" GridPane.rowIndex="1">
+      <font>
+         <Font name="Farah Regular" size="18.0" />
+      </font>
+      <GridPane.margin>
+         <Insets left="25.0" />
+      </GridPane.margin>
+   </Label>
    <Label text="Report number" GridPane.rowIndex="2">
       <font>
          <Font size="18.0" />
@@ -58,40 +66,6 @@
          <Insets left="25.0" />
       </GridPane.margin>
    </Label>
-   <Label text="Date  and Time" GridPane.rowIndex="6">
-      <font>
-         <Font name="Farah Regular" size="18.0" />
-      </font>
-      <GridPane.margin>
-         <Insets left="25.0" />
-      </GridPane.margin>
-   </Label>
-   <Label text="Reporter" GridPane.rowIndex="1">
-      <font>
-         <Font name="Farah Regular" size="18.0" />
-      </font>
-      <GridPane.margin>
-         <Insets left="25.0" />
-      </GridPane.margin>
-   </Label>
-   <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submitAction" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="7">
-      <GridPane.margin>
-         <Insets left="25.0" />
-      </GridPane.margin>
-   </Button>
-   <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-      <GridPane.margin>
-         <Insets right="25.0" />
-      </GridPane.margin>
-   </Button>
-   <TextField fx:id="loc" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
-      <GridPane.margin>
-         <Insets right="25.0" />
-      </GridPane.margin>
-   </TextField>
-   <Label fx:id="reporter" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-   <Label fx:id="reportNumber" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-   <Label fx:id="dateAndTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
    <Label text="Type" GridPane.rowIndex="4">
       <GridPane.margin>
          <Insets left="25.0" />
@@ -108,6 +82,21 @@
          <Insets left="25.0" />
       </GridPane.margin>
    </Label>
+   <Label text="Date  and Time" GridPane.rowIndex="6">
+      <font>
+         <Font name="Farah Regular" size="18.0" />
+      </font>
+      <GridPane.margin>
+         <Insets left="25.0" />
+      </GridPane.margin>
+   </Label>
+   <Label fx:id="reporter" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+   <Label fx:id="reportNumber" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+   <TextField fx:id="loc" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+      <GridPane.margin>
+         <Insets right="25.0" />
+      </GridPane.margin>
+   </TextField>
    <RadioButton id="Bottled" fx:id="bottled" mnemonicParsing="false" text="Bottled" GridPane.columnIndex="1" GridPane.rowIndex="4">
       <GridPane.margin>
          <Insets left="25.0" />
@@ -139,4 +128,15 @@
          <Insets left="25.0" />
       </GridPane.margin>
    </RadioButton>
+   <Label fx:id="dateAndTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+   <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submitAction" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="7">
+      <GridPane.margin>
+         <Insets left="25.0" />
+      </GridPane.margin>
+   </Button>
+   <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <GridPane.margin>
+         <Insets right="25.0" />
+      </GridPane.margin>
+   </Button>
 </GridPane>

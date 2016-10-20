@@ -54,7 +54,7 @@ public class uneditableReportController {
     private void initialize() {
         report = WaterApplication.getReports().get(reportViewController.getReportNum());
         profile = report.getProfile();
-        loc.setText(report.getLocation());
+        loc.setText(report.getLocation().getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(reportViewController.getReportNum()));
         dateAndTime.setText(report.getDateAndTime().toString());
