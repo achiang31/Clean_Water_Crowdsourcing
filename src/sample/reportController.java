@@ -103,6 +103,10 @@ public class reportController {
         String errorMessageStr = "";
         if (loc.getText() == null || loc.getText().length() == 0) {
             errorMessageStr += "Empty location\n";
+        } else if (TypeGroup.getSelectedToggle() == null) {
+            errorMessageStr += "Must select a type!\n";
+        } else if (ConditionGroup.getSelectedToggle() == null) {
+            errorMessageStr += "Must select a condition!\n";
         } else {
             String location = loc.getText();
             String[] tokens = location.split(",");
@@ -111,24 +115,24 @@ public class reportController {
                 try {
                     double latitude = Double.parseDouble(latitudeStr);
                     if (latitude < - 90.0 || latitude > 90.0) {
-                        errorMessageStr += "Invalid latitude!";
+                        errorMessageStr += "Invalid latitude!\n";
                     } else {
                         this.latitude = latitude;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid latitude!";
+                    errorMessageStr += "Invalid latitude!\n";
                 }
             } else if (tokens.length >= 2 && tokens[1] != null) {
                 String longitudeStr = tokens[0];
                 try {
                     double longitude = Double.parseDouble(longitudeStr);
                     if (longitude < - 180.0 || longitude > 180.0) {
-                        errorMessageStr += "Invalid longitude!";
+                        errorMessageStr += "Invalid longitude!\n";
                     } else {
                         this.longitude = longitude;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid longitude!";
+                    errorMessageStr += "Invalid longitude!\n";
                 }
             }
         }
