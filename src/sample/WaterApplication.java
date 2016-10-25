@@ -10,6 +10,8 @@ public class WaterApplication {
     private static ObservableMap<String, User> users = FXCollections.observableHashMap();
     private static ObservableMap<Integer, Report> reports = FXCollections.observableHashMap();
     private static ObservableList<Report> reportList = FXCollections.observableArrayList();
+    private  static ObservableMap<Integer, PurityReport> purityreports = FXCollections.observableHashMap();
+    private static ObservableList<PurityReport> purityreportList = FXCollections.observableArrayList();
 
     /**
      * Add a new user to user list
@@ -17,7 +19,7 @@ public class WaterApplication {
      * @param username    Username of new user
      * @param password    Password of new user
      */
-    public static void addUser(String accountType, String username, String password) {
+    public static void addUser(AccountType accountType, String username, String password) {
         User newUser = new User(accountType, username, password);
         users.put(username,newUser);
     }
@@ -31,6 +33,13 @@ public class WaterApplication {
         reports.put(reportController.reportNum,newReport);
         reportList.add(newReport);
         return newReport;
+    }
+
+    public static PurityReport addPurityReport(Location location) {
+        PurityReport purityReport = new PurityReport(location);
+        purityreports.put(purityController.reportNum,purityReport);
+        purityreportList.add(purityReport);
+        return purityReport;
     }
 
     /**
@@ -61,10 +70,21 @@ public class WaterApplication {
     }
 
     /**
+     * Get purity report list of the application
+     * @return Map of purity reports <reportNum, Report> of application
+     */
+    public static ObservableMap<Integer, PurityReport> getPurityreports() { return purityreports; }
+    /**
      * Get report list of the application
      * @return List of reports <reportNum, Report> of application
      */
     public static ObservableList<Report> getReportsList() {
         return reportList;
     }
+
+    /**
+     * Get purity report list of the application
+     * @return List of purity reports <reportNum, Report> of application
+     */
+    public static ObservableList<PurityReport> getPurityreportList() { return purityreportList; }
 }

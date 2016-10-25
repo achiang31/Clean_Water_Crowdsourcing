@@ -108,10 +108,17 @@ public class Report {
         this.condition = Condition.valueOf(condition);
     }
 
+    /**
+     * set the typen of the report
+     * @return type in the report
+     */
     public Type getType() {
         return type;
     }
-
+    /**
+     * set the type of the report
+     * @param type in the report
+     */
     public void setType(String type) {
         this.type = Type.valueOf(type);
     }

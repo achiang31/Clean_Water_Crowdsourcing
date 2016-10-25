@@ -8,14 +8,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by xingxing on 10/5/16.
+ * Created by bigjohnlin on 10/24/2016.
  */
-public class reportController {
+public class purityController {
     @FXML
     private Label reporter;
 
@@ -23,7 +24,7 @@ public class reportController {
     private Label reportNumber;
 
     @FXML
-   private TextField loc;
+    private TextField loc;
 
     @FXML
     private Label dateAndTime;
@@ -37,10 +38,7 @@ public class reportController {
     private Label errorMessage;
 
     @FXML
-    private ToggleGroup TypeGroup;
-
-    @FXML
-    private ToggleGroup ConditionGroup;
+    private ToggleGroup OverallConditionGroup;
 
     private static String username;
 
@@ -53,6 +51,12 @@ public class reportController {
     private double latitude;
 
     private double longitude;
+
+    @FXML
+    private TextField virusPPM;
+
+    @FXML
+    private TextField contPPM;
 
     /**
      * initialize the Report with automoatic generated info of current user
@@ -78,14 +82,14 @@ public class reportController {
             String title = "Report " + reportNum;
             String descrip = descriptionFormatter();
             Location location = new Location(latitude, longitude, loc.getText(), title, descrip);
-            Report report = WaterApplication.addReport(location);
-            report.setUserProfile(profile);
-            report.setDateAndTime(date);
-            report.setReportNum(reportNum);
-            RadioButton typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
-            report.setType(typeButton.getText().toUpperCase());
-            RadioButton conditionButton = (RadioButton) ConditionGroup.getSelectedToggle();
-            report.setCondition((conditionButton.getText().toUpperCase()));
+            PurityReport pureReport = WaterApplication.addPurityReport(location);
+            pureReport.setUserProfile(profile);
+            pureReport.setDateAndTime(date);
+            pureReport.setReportNum(reportNum);
+            RadioButton conditionButton = (RadioButton) OverallConditionGroup.getSelectedToggle();
+            pureReport.setOverallCondition((conditionButton.getText().toUpperCase()));
+            pureReport.setConditionPPM(Integer.parseInt(contPPM.getText()));
+            pureReport.setVirusPPM(Integer.parseInt(virusPPM.getText()));
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
@@ -103,10 +107,6 @@ public class reportController {
         String errorMessageStr = "";
         if (loc.getText() == null || loc.getText().length() == 0) {
             errorMessageStr += "Empty location\n";
-        } else if (TypeGroup.getSelectedToggle() == null) {
-            errorMessageStr += "Must select a type!\n";
-        } else if (ConditionGroup.getSelectedToggle() == null) {
-            errorMessageStr += "Must select a condition!\n";
         } else {
             String location = loc.getText();
             String[] tokens = location.split(",");
@@ -115,24 +115,24 @@ public class reportController {
                 try {
                     double latitude = Double.parseDouble(latitudeStr);
                     if (latitude < - 90.0 || latitude > 90.0) {
-                        errorMessageStr += "Invalid latitude!\n";
+                        errorMessageStr += "Invalid latitude!";
                     } else {
                         this.latitude = latitude;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid latitude!\n";
+                    errorMessageStr += "Invalid latitude!";
                 }
             } else if (tokens.length >= 2 && tokens[1] != null) {
                 String longitudeStr = tokens[0].trim();
                 try {
                     double longitude = Double.parseDouble(longitudeStr);
                     if (longitude < - 180.0 || longitude > 180.0) {
-                        errorMessageStr += "Invalid longitude!\n";
+                        errorMessageStr += "Invalid longitude!";
                     } else {
                         this.longitude = longitude;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid longitude!\n";
+                    errorMessageStr += "Invalid longitude!";
                 }
             }
         }
@@ -175,7 +175,3 @@ public class reportController {
         return descrip;
     }
 }
-
-
-
-
