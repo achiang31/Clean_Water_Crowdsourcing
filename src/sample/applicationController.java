@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
@@ -32,7 +33,14 @@ public class applicationController {
     @FXML
     private Button availabilityButton;
 
+    @FXML
+    private Button createPurityReport;
+
+    @FXML
+    private Button viewPurityReport;
+
     private static String username;
+    private static AccountType account;
 
     /**
      * Handle when "Edit Profile" button is pressed --> display Profile of the current user
@@ -84,6 +92,45 @@ public class applicationController {
         stage.setTitle("Report");
         stage.show();
     }
+    @FXML
+    private void createPurityReport(ActionEvent event) throws IOException {
+        if (account.getAbbrType() == "WK" || account.getAbbrType() == "MN") {
+            purityController.setUsername(username);
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+            Parent report = FXMLLoader.load(getClass().getResource("purityReport.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(report);
+            stage.setScene(scene);
+            stage.setTitle("Purity Report");
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Credentials");
+            alert.setHeaderText("Invalid Credentials");
+            alert.setContentText("You do not have permission to perform this task!");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void viewPurityReport(ActionEvent event) throws IOException {
+        if (account.getAbbrType() == "MN") {
+        reportController.setUsername(username);
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent report = FXMLLoader.load(getClass().getResource("viewPurityReports.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(report);
+        stage.setScene(scene);
+        stage.setTitle("Purity Report");
+        stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Credentials");
+            alert.setHeaderText("Invalid Credentials");
+            alert.setContentText("You do not have permission to perform this task!");
+            alert.showAndWait();
+        }
+    }
     /**
      * Handle when "viewReports" button is pressed --> end current user session --> display Reports screen
      * @param event Clicking "viewReports" button
@@ -118,5 +165,6 @@ public class applicationController {
     public static void setUsername(String _username) {
         username = _username;
     }
+    public static void setAccount(AccountType _account){ account = _account; }
 }
 

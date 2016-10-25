@@ -5,7 +5,7 @@ package sample;
  */
 public class User {
 
-    private String accountType;
+    private AccountType accountType;
 
     private String username;
 
@@ -13,14 +13,13 @@ public class User {
 
     private Profile profile;
 
-
     /**
      * Create an User object
      * @param accountType Account type of user
      * @param username    User's username
      * @param password    User's password
      */
-    public User(String accountType, String username, String password) {
+    public User(AccountType accountType, String username, String password) {
         this.accountType = accountType;
         this.username = username;
         this.password = password;
@@ -30,7 +29,7 @@ public class User {
      * Get the account type of user
      * @return User's account type
      */
-    public String getAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 

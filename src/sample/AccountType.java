@@ -1,8 +1,5 @@
 package sample;
 
-/**
- * Created by Alex on 10/1/16.
- */
 public enum AccountType {
 
     US ("User", "US"),
@@ -16,6 +13,18 @@ public enum AccountType {
     /** the representation of the account type abbreviation - always 2 characters*/
     private final String abbrType;
 
+    AccountType(String ptype) {
+        accountType = ptype;
+        if (ptype == "User") {
+            abbrType = "US";
+        } else if (ptype == "Worker") {
+            abbrType = "WK";
+        } else if (ptype == "Manager") {
+            abbrType = "MN";
+        } else {
+            abbrType = "AD";
+        }
+    }
     /**
      * Constructor for the enumeration
      *
