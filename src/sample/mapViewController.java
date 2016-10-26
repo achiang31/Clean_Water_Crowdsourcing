@@ -33,6 +33,8 @@ public class mapViewController implements Initializable, MapComponentInitialized
 
     private GoogleMap map;
 
+    private Window mainStage;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
@@ -79,7 +81,8 @@ public class mapViewController implements Initializable, MapComponentInitialized
                     UIEventType.click,
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content(l.getDescription());
+                        infoWindowOptions.content(l.getTitle() + "\n");
+                        infoWindowOptions.content(l.getDescription() + "\n");
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, marker);
@@ -89,5 +92,64 @@ public class mapViewController implements Initializable, MapComponentInitialized
         }
 
 
+    }
+
+
+    @FXML
+    public void onOpenTextFileMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open Text File");
+        File file  = fc.showOpenDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().loadModelFromText(file);
+    }
+
+    @FXML
+    public void onOpenBinaryFileMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open Binary File");
+        File file  = fc.showOpenDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().loadModelFromBinary(file);
+    }
+
+    @FXML
+    public void onOpenJsonFileMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open JSON File");
+        File file  = fc.showOpenDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().loadModelFromJson(file);
+    }
+
+    @FXML
+    public void onSaveTextFileMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save Text File");
+        File file  = fc.showSaveDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().saveModelToText(file);
+    }
+
+    @FXML
+    public void onSaveBinaryFileMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save Binary File");
+        File file  = fc.showSaveDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().saveModelToBinary(file);
+    }
+
+    @FXML
+    public void onSaveJsonMenu() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save JSON File");
+        File file  = fc.showSaveDialog(mainStage);
+        if (file != null)
+            Facade.getInstance().saveModelToJson(file);
+    }
+
+    @FXML
+    public void onCloseMenu() {
     }
 }
