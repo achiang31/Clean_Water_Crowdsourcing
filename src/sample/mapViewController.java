@@ -82,7 +82,7 @@ public class mapViewController implements Initializable, MapComponentInitialized
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
                         infoWindowOptions.content(l.getTitle() + "\n");
-                        infoWindowOptions.content(l.getDescription());
+                        infoWindowOptions.content(l.getDescription() + "\n");
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, marker);

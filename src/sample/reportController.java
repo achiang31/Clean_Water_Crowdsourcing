@@ -33,6 +33,7 @@ public class reportController {
 
     @FXML
     private Button cancelButton;
+
     @FXML
     private Label errorMessage;
 
@@ -53,6 +54,10 @@ public class reportController {
     private double latitude;
 
     private double longitude;
+
+    private RadioButton typeButton;
+
+    private RadioButton conditionButton;
 
     /**
      * initialize the Report with automoatic generated info of current user
@@ -82,9 +87,7 @@ public class reportController {
             report.setUserProfile(profile);
             report.setDateAndTime(date);
             report.setReportNum(reportNum);
-            RadioButton typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
             report.setType(typeButton.getText().toUpperCase());
-            RadioButton conditionButton = (RadioButton) ConditionGroup.getSelectedToggle();
             report.setCondition((conditionButton.getText().toUpperCase()));
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
@@ -101,12 +104,14 @@ public class reportController {
      */
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if (loc.getText() == null || loc.getText().length() == 0) {
-            errorMessageStr += "Empty location\n";
-        } else if (TypeGroup.getSelectedToggle() == null) {
+        typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
+        conditionButton = (RadioButton) ConditionGroup.getSelectedToggle();
+        if (typeButton == null) {
             errorMessageStr += "Must select a type!\n";
-        } else if (ConditionGroup.getSelectedToggle() == null) {
+        } else if (conditionButton == null) {
             errorMessageStr += "Must select a condition!\n";
+        } else if (loc.getText() == null || loc.getText().length() == 0) {
+            errorMessageStr += "Empty location!\n";
         } else {
             String location = loc.getText();
             String[] tokens = location.split(",");
@@ -114,7 +119,7 @@ public class reportController {
                 String latitudeStr = tokens[0].trim();
                 try {
                     double latitude = Double.parseDouble(latitudeStr);
-                    if (latitude < - 90.0 || latitude > 90.0) {
+                    if (latitude < -90.0 || latitude > 90.0) {
                         errorMessageStr += "Invalid latitude!\n";
                     } else {
                         this.latitude = latitude;
@@ -122,7 +127,10 @@ public class reportController {
                 } catch (NumberFormatException e) {
                     errorMessageStr += "Invalid latitude!\n";
                 }
-            } else if (tokens.length >= 2 && tokens[1] != null) {
+            }
+            if (tokens.length < 2) {
+                errorMessageStr += "Empty longitude!\n";
+            } else if (tokens[1] != null) {
                 String longitudeStr = tokens[0].trim();
                 try {
                     double longitude = Double.parseDouble(longitudeStr);
@@ -136,10 +144,10 @@ public class reportController {
                 }
             }
         }
+        errorMessage.setText(errorMessageStr);
         if (errorMessageStr.length() == 0) {
             return true;
         } else {
-            errorMessage.setText(errorMessageStr);
             return false;
         }
     }
@@ -171,7 +179,9 @@ public class reportController {
 
     private String descriptionFormatter() {
         String reporter = profile.getFirstName() + " " + profile.getLastName();
-        String descrip = reporter + " submitted this report on: " + date;
+        String descrip = reporter + " submitted this report on: " + date + "\n";
+        descrip += "Water type: " + typeButton.getText() + "\n";
+        descrip += "Water condition: " + conditionButton.getText();
         return descrip;
     }
 }
