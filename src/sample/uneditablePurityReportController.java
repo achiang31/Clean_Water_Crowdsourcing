@@ -49,7 +49,7 @@ public class uneditablePurityReportController {
     private PurityReport report;
 
     /**
-     * initialize the Report with automatic generated info of current user
+     * initialize the Purity Report with automatic generated info of current user
      */
     @FXML
     private void initialize() {

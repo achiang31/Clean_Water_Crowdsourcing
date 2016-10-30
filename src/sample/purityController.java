@@ -59,7 +59,7 @@ public class purityController {
     private TextField contPPM;
 
     /**
-     * initialize the Report with automoatic generated info of current user
+     * initialize the Purity Report with automatic generated info of current user
      */
     @FXML
     private void initialize() {
@@ -71,8 +71,8 @@ public class purityController {
     }
     /**
      *
-     * Handle when "submitButton" button is pressed --> save changes to report --> display Water Application
-     * @param event Clicking "submitButton" button
+     * Handle when "submitAction" button is pressed --> save changes to report --> display Water Application
+     * @param event Clicking "submitAction" button
      * @throws IOException when corresponding .fxml file does not exist
      */
     @FXML
@@ -100,7 +100,7 @@ public class purityController {
         }
     }
     /**
-     * Test if user input for profile is valid, if not, display error message on screen
+     * Test if user input for purity report is valid, if not, display error message on screen
      * @return if input is valid or not
      */
     private boolean isInputValid() {
@@ -169,6 +169,10 @@ public class purityController {
         username = _username;
     }
 
+    /**
+     * Format for printing out the report and date
+     * @return description
+     */
     private String descriptionFormatter() {
         String reporter = profile.getFirstName() + " " + profile.getLastName();
         String descrip = reporter + " submitted this report on: " + date;

@@ -5,8 +5,15 @@ package sample;
  */
 public enum Condition {
     CLEAR("CLEAR"), DIRTY("DIRTY"), TREATABLE("TREATABLE");
+
+    /** the full string representation of the account type */
     private final String name;
 
+    /**
+     * Constructor for the enumeration
+     *
+     * @param name   name of condition
+     */
     private Condition(final String name) {
         this.name = name;
     }
