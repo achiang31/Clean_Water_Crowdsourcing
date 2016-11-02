@@ -26,8 +26,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
-
-
-//org.hibernate:hibernate-core:5.2.4.Final
-//that line should go in the gradle file, if we have one; it makes Hibernate a dependency of this project
