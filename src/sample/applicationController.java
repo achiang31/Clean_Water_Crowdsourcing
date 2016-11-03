@@ -92,6 +92,11 @@ public class applicationController {
         stage.setTitle("Report");
         stage.show();
     }
+    /**
+     * Handle when "createPurityReport" button is pressed --> end current user session --> display Purity Reports screen
+     * @param event Clicking "createPurityReports" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void createPurityReport(ActionEvent event) throws IOException {
         if (account.getAbbrType() == "WK" || account.getAbbrType() == "MN") {
@@ -111,7 +116,11 @@ public class applicationController {
             alert.showAndWait();
         }
     }
-
+    /**
+     * Handle when "ViewPurityReports" button is pressed --> end current user session --> display view of PurityReports screen
+     * @param event Clicking "viewPurityReports" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void viewPurityReport(ActionEvent event) throws IOException {
         if (account.getAbbrType() == "MN") {
@@ -148,6 +157,11 @@ public class applicationController {
         stage.show();
     }
 
+    /**
+     * Handle when "viewAvailabilityReport" button is pressed --> end current user session --> display view of availability Reports screen
+     * @param event Clicking "createReports" button
+     * @throws IOException when corresponding .fxml file does not exist
+     */
     @FXML
     private void viewAvailabilityAction(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("mapview.fxml"));
@@ -165,6 +179,10 @@ public class applicationController {
     public static void setUsername(String _username) {
         username = _username;
     }
+    /**
+     * Set the account type of current user operating the application
+     * @param _account accountType of current user
+     */
     public static void setAccount(AccountType _account){ account = _account; }
 }
 

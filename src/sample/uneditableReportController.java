@@ -48,7 +48,7 @@ public class uneditableReportController {
     private Report report;
 
     /**
-     * initialize the Report with automoatic generated info of current user
+     * initialize the Report with automatic generated info of current user
      */
     @FXML
     private void initialize() {

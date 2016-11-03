@@ -13,6 +13,11 @@ public enum AccountType {
     /** the representation of the account type abbreviation - always 2 characters*/
     private final String abbrType;
 
+    /**
+     * Constructor for the enumeration
+     *
+     * @param ptype   full name of the account type
+     */
     AccountType(String ptype) {
         accountType = ptype;
         if (ptype == "User") {

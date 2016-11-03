@@ -35,11 +35,21 @@ public class mapViewController implements Initializable, MapComponentInitialized
 
     private Window mainStage;
 
+
+    /**
+     * initialize the mapView with listener
+     * @param url URL
+     * @param rb Resource Bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInializedListener(this);
     }
 
+
+    /**
+     * initialize the set up of the map with reports
+     */
     @Override
     public void mapInitialized() {
         MapOptions options = new MapOptions();
@@ -63,7 +73,7 @@ public class mapViewController implements Initializable, MapComponentInitialized
         map = mapView.createMap(options);
 
 
-        /** now we communciate with the model to get all the locations for markers */
+        // now we communicate with the model to get all the locations for markers
         List<Report> reports = WaterApplication.getReportsList();
 
         for (int i = 0; i < reports.size(); i++) {
@@ -95,6 +105,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
     }
 
 
+    /**
+     * Open text file menu
+     */
     @FXML
     public void onOpenTextFileMenu() {
         FileChooser fc = new FileChooser();
@@ -104,6 +117,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
             Facade.getInstance().loadModelFromText(file);
     }
 
+    /**
+     * Open binary file menu
+     */
     @FXML
     public void onOpenBinaryFileMenu() {
         FileChooser fc = new FileChooser();
@@ -113,6 +129,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
             Facade.getInstance().loadModelFromBinary(file);
     }
 
+    /**
+     * Open JSON file menu
+     */
     @FXML
     public void onOpenJsonFileMenu() {
         FileChooser fc = new FileChooser();
@@ -121,7 +140,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
         if (file != null)
             Facade.getInstance().loadModelFromJson(file);
     }
-
+    /**
+     * Save text file menu
+     */
     @FXML
     public void onSaveTextFileMenu() {
         FileChooser fc = new FileChooser();
@@ -130,7 +151,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
         if (file != null)
             Facade.getInstance().saveModelToText(file);
     }
-
+    /**
+     * Save binary file menu
+     */
     @FXML
     public void onSaveBinaryFileMenu() {
         FileChooser fc = new FileChooser();
@@ -139,7 +162,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
         if (file != null)
             Facade.getInstance().saveModelToBinary(file);
     }
-
+    /**
+     * Save JSON file menu - placeholder
+     */
     @FXML
     public void onSaveJsonMenu() {
         FileChooser fc = new FileChooser();
@@ -148,7 +173,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
         if (file != null)
             Facade.getInstance().saveModelToJson(file);
     }
-
+    /**
+     * Close menu
+     */
     @FXML
     public void onCloseMenu() {
     }
