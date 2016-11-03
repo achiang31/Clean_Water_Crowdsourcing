@@ -24,7 +24,10 @@ public class purityController {
     private Label reportNumber;
 
     @FXML
-    private TextField loc;
+    private TextField lat;
+
+    @FXML
+    private TextField lon;
 
     @FXML
     private Label dateAndTime;
@@ -34,6 +37,7 @@ public class purityController {
 
     @FXML
     private Button cancelButton;
+
     @FXML
     private Label errorMessage;
 
@@ -81,7 +85,7 @@ public class purityController {
             reportNum++;
             String title = "Report " + reportNum;
             String descrip = descriptionFormatter();
-            Location location = new Location(latitude, longitude, loc.getText(), title, descrip);
+            Location location = new Location(latitude, longitude, lat.getText() + "," + lon.getText(), title, descrip);
             PurityReport pureReport = WaterApplication.addPurityReport(location);
             pureReport.setUserProfile(profile);
             pureReport.setDateAndTime(date);
@@ -105,35 +109,68 @@ public class purityController {
      */
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if (loc.getText() == null || loc.getText().length() == 0) {
-            errorMessageStr += "Empty location\n";
+        if (lat.getText() == null || lat.getText().length() == 0) {
+            errorMessageStr += "Empty latitude!\n";
         } else {
-            String location = loc.getText();
-            String[] tokens = location.split(",");
-            if (tokens[0] != null) {
-                String latitudeStr = tokens[0].trim();
-                try {
-                    double latitude = Double.parseDouble(latitudeStr);
-                    if (latitude < - 90.0 || latitude > 90.0) {
-                        errorMessageStr += "Invalid latitude!";
-                    } else {
-                        this.latitude = latitude;
-                    }
-                } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid latitude!";
+            try {
+                double latitude = Double.parseDouble(lat.getText());
+                if (latitude < -90.0 || latitude > 90.0) {
+                    errorMessageStr += "Invalid latitude!\n";
+                } else {
+                    this.latitude = latitude;
                 }
-            } else if (tokens.length >= 2 && tokens[1] != null) {
-                String longitudeStr = tokens[0].trim();
+            } catch (NumberFormatException e) {
+                errorMessageStr += "Invalid latitude!\n";
+            }
+        }
+        if (errorMessageStr.length() == 0) {
+            if (lon.getText() == null || lon.getText().length() == 0) {
+                errorMessageStr += "Empty longitude!\n";
+            } else {
                 try {
-                    double longitude = Double.parseDouble(longitudeStr);
-                    if (longitude < - 180.0 || longitude > 180.0) {
-                        errorMessageStr += "Invalid longitude!";
+                    double longitude = Double.parseDouble(lon.getText());
+                    if (longitude < -180.0 || longitude > 180.0) {
+                        errorMessageStr += "Invalid longitude!\n";
                     } else {
                         this.longitude = longitude;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessageStr += "Invalid longitude!";
+                    errorMessageStr += "Invalid longitude!\n";
                 }
+            }
+        }
+        if (errorMessageStr.length() == 0) {
+            if (virusPPM.getText() == null || virusPPM.getText().length() == 0) {
+                errorMessageStr += "Empty virus PPM!\n";
+            } else {
+                try {
+                    int virus = Integer.parseInt(virusPPM.getText());
+                    if (virus < 0) {
+                        errorMessageStr += "Invalid virus PPM!\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessageStr += "Invalid virus PPM!\n";
+                }
+            }
+        }
+        if (errorMessageStr.length() == 0) {
+            if (contPPM.getText() == null || contPPM.getText().length() == 0) {
+                errorMessageStr += "Empty contaminant PPM!\n";
+            } else {
+                try {
+                    int cont = Integer.parseInt(contPPM.getText());
+                    if (cont < 0) {
+                        errorMessageStr += "Invalid contaminant PPM!\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessageStr += "Invalid contaminant PPM!\n";
+                }
+            }
+        }
+        if (errorMessageStr.length() == 0) {
+            RadioButton overall = (RadioButton) OverallConditionGroup.getSelectedToggle();
+            if (overall == null) {
+                errorMessageStr += "Must select an overall condition!\n";
             }
         }
         if (errorMessageStr.length() == 0) {
