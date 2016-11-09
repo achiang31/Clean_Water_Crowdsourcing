@@ -1,6 +1,7 @@
 package sample;
 
 
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by bigjohnlin on 9/18/2016.
@@ -201,5 +211,40 @@ public class applicationController {
      * @param _account accountType of current user
      */
     public static void setAccount(AccountType _account){ account = _account; }
+
+
+
+    public void saveApplicationController() {
+        try {
+            try (PrintWriter out = new PrintWriter(new File("ACdata.json"))) {
+                Gson gs = new Gson();
+                String gson = gs.toJson(this);
+                out.println(gson);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static applicationController loadApplicationController() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("ACdata.json"))) {
+                Gson gs = new Gson();
+                File loading = new File("ACdata.json");
+                FileInputStream fis = new FileInputStream(loading);
+                byte[] data = new byte[(int) loading.length()];
+                fis.read(data);
+                fis.close();
+                String str = new String(data, "UTF-8");
+                applicationController instance = gs.fromJson(str, applicationController.class);
+                return instance;
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
 
