@@ -1,7 +1,25 @@
 package sample;
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Alex on 10/1/16.
@@ -87,4 +105,39 @@ public class WaterApplication {
      * @return List of purity reports <reportNum, Report> of application
      */
     public static ObservableList<PurityReport> getPurityreportList() { return purityreportList; }
+
+
+
+    public void saveWaterApplication() {
+        try {
+            try (PrintWriter out = new PrintWriter(new File("WAdata.json"))) {
+                Gson gs = new Gson();
+                String gson = gs.toJson(this);
+                out.print(gson);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static WaterApplication loadWaterApplication() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("WAdata.json"))) {
+                Gson gs = new Gson();
+                File loading = new File("WAdata.json");
+                FileInputStream fis = new FileInputStream(loading);
+                byte[] data = new byte[(int) loading.length()];
+                fis.read(data);
+                fis.close();
+                String str = new String(data, "UTF-8");
+                WaterApplication instance = gs.fromJson(str, WaterApplication.class);
+                return instance;
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
