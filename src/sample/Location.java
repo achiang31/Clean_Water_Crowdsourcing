@@ -54,4 +54,23 @@ public class Location {
      */
     public String getDescription() {return description;}
 
+    @Override
+    public String toString() {
+        String latLong = "(" + latitude +", " + longitude + ")";
+        return latLong;
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object == this) {
+            return true;
+        }
+        if (!(object instanceof Location)) {
+            return false;
+        }
+        Location l = (Location) object;
+        return Double.compare(latitude, l.latitude) == 0 && Double.compare(longitude, l.longitude) == 0;
+    }
 }

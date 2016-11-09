@@ -39,6 +39,9 @@ public class applicationController {
     @FXML
     private Button viewPurityReport;
 
+    @FXML
+    private Button callHistoricalReport;
+
     private static String username;
     private static AccountType account;
 
@@ -164,11 +167,25 @@ public class applicationController {
      */
     @FXML
     private void viewAvailabilityAction(ActionEvent event) throws IOException {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent report = FXMLLoader.load(getClass().getResource("mapview.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(report);
         stage.setScene(scene);
         stage.setTitle("Map");
+        stage.show();
+    }
+
+    @FXML
+    private void callHistRep(ActionEvent event) throws IOException {
+        historicalReportController.setUsername(username);
+        historicalReportController.setAccount(account);
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent historyReport = FXMLLoader.load(getClass().getResource("historicalReport.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(historyReport);
+        stage.setScene(scene);
+        stage.setTitle("LocVirOrContYear");
         stage.show();
     }
 

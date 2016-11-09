@@ -61,7 +61,7 @@ public class uneditablePurityReportController {
         dateAndTime.setText(report.getDateAndTime().toString());
         condition.setText(report.getOverallCondition().toString());
         virus.setText(Integer.toString(report.getVirusPPM()));
-        conditionPPM.setText(Integer.toString(report.getConditionPPM()));
+        conditionPPM.setText(Integer.toString(report.getContaminatePPM()));
     }
 
     /**

@@ -48,5 +48,6 @@
       </Button>
       <Button fx:id="purityReportBtn" mnemonicParsing="false" onAction="#createPurityReport" text="Create Purity Report" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <Button mnemonicParsing="false" onAction="#viewPurityReport" text="View Water Purity Report" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+       <Button alignment="CENTER" mnemonicParsing="false" onAction="#callHistRep" text="Historical Report" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
    </children>
 </GridPane>

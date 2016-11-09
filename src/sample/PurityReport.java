@@ -5,7 +5,7 @@ package sample;
  */
 public class PurityReport extends Report {
     private int virusPPM;
-    private int conditionPPM;
+    private int contaminatePPM;
     private OverallCondition overallCondition;
 
     /**
@@ -36,8 +36,8 @@ public class PurityReport extends Report {
      * Get the condition ppm of the report
      * @return condition ppm in the report
      */
-    public int getConditionPPM() {
-        return conditionPPM;
+    public int getContaminatePPM() {
+        return contaminatePPM;
     }
 
     /**
@@ -45,7 +45,7 @@ public class PurityReport extends Report {
      * @param ppm condition ppm for the report
      */
     public void setConditionPPM(int ppm) {
-        conditionPPM = ppm;
+        contaminatePPM = ppm;
     }
 
     /**
