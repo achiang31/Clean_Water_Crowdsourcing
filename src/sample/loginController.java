@@ -41,13 +41,13 @@ public class loginController {
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         WaterApplication persistence = WaterApplication.loadWaterApplication();
-        System.out.println(persistence.getUsers());
+        System.out.println(WaterApplication.getUsers());
 //        if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
 //                && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
-        if (persistence.getUsers() != null && persistence.getUsers().containsKey(username.getText())
-                && persistence.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
+        if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
+                && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
             applicationController.setUsername(username.getText());
-            applicationController.setAccount(persistence.getUsers().get(username.getText()).getAccountType()); //need to fix this bad design principle
+            applicationController.setAccount(WaterApplication.getUsers().get(username.getText()).getAccountType()); //need to fix this bad design principle
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();

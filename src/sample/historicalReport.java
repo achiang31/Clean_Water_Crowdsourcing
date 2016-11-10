@@ -5,12 +5,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.stage.Stage;
 
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static javafx.application.Application.launch;
@@ -19,33 +15,31 @@ import static javafx.application.Application.launch;
  */
 
 public class historicalReport extends Application {
-    final static String jan = "January";
-    final static String feb = "February";
-    final static String mar = "March";
-    final static String apr = "April";
-    final static String may = "May";
-    final static String jun = "June";
-    final static String jul = "July";
-    final static String aug = "August";
-    final static String sep = "September";
-    final static String oct = "October";
-    final static String nov = "November";
-    final static String dec = "December";
-    private int[] month = new int[12];
+    private final static String jan = "January";
+    private final static String feb = "February";
+    private final static String mar = "March";
+    private final static String apr = "April";
+    private final static String may = "May";
+    private final static String jun = "June";
+    private final static String jul = "July";
+    private final static String aug = "August";
+    private final static String sep = "September";
+    private final static String oct = "October";
+    private final static String nov = "November";
+    private final static String dec = "December";
+    private final int[] month = new int[12];
 
-    private Integer yea;
-    private Location loc;
-    private String a;
-    private Map<Integer, Integer> map;
+    private final Integer yea;
+    private final Map<Integer, Integer> map;
 
     public historicalReport (Integer yea, Location loc, String a, Map<Integer, Integer> map) {
         this.yea = yea;
-        this.loc = loc;
-        this.a = a;
+        Location loc1 = loc;
+        String a1 = a;
         this.map = map;
     }
 
-    public void setData() {
+    private void setData() {
         for (int a = 0; a < month.length; a++) {
             month[a] = 0;
         }
@@ -62,7 +56,7 @@ public class historicalReport extends Application {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String, Number> bc =
-                new BarChart<String, Number>(xAxis, yAxis);
+                new BarChart<>(xAxis, yAxis);
         bc.setTitle("PPM of the Selected Location by Month");
         xAxis.setLabel("Month");
         yAxis.setLabel("PPM");

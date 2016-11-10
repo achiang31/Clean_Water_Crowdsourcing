@@ -37,6 +37,7 @@ public class Profile {
         this.emailAddress = emailAddress;
         this.ID = ID;
         this.homeAddress = homeAddress;
+        //noinspection deprecation
         birthday = new Date(Integer.parseInt(year) - 1900,
                 Integer.parseInt(month) - 1, Integer.parseInt(day));
     }
@@ -107,6 +108,7 @@ public class Profile {
      * @param year  Birth year of user
      */
     public void setBirthday(String month, String day, String year) {
+        //noinspection deprecation
         birthday = new Date(Integer.parseInt(year) - 1900,
                 Integer.parseInt(month) - 1, Integer.parseInt(day));
     }

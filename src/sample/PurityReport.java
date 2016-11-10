@@ -61,7 +61,7 @@ public class PurityReport extends Report {
      * @param condition Overall Condition for the report
      */
     public void setOverallCondition(String condition) {
-        overallCondition = overallCondition.valueOf(condition);
+        overallCondition = OverallCondition.valueOf(condition);
     }
 
 

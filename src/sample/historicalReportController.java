@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.application.Application;
-import javafx.beans.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -14,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,7 +23,7 @@ import static sample.AccountType.MN;
 /**
  * Created by biggerSean on 11/1/2016.
  */
-public class historicalReportController implements Initializable {
+class historicalReportController implements Initializable {
     @FXML
     private ComboBox<String> VorC;
 
@@ -42,21 +39,20 @@ public class historicalReportController implements Initializable {
     @FXML
     private Label plzSelect;
 
-    private static ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
-    private static ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
-    private static ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
-    private static String username;
+    private static final ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
     private static AccountType account;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get all the valid years//
         List<PurityReport> validReport = WaterApplication.getPurityreportList();
-        ObservableList<PurityReport> obsReportList = FXCollections.observableList(validReport);
+        @SuppressWarnings("UnusedAssignment") ObservableList<PurityReport> obsReportList = FXCollections.observableList(validReport);
         Collection<Integer> allYears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         for (int a = 0; a < 12; a++) {
-            map.put(a, new ArrayList<PurityReport>());
+            map.put(a, new ArrayList<>());
         }
         for (int i = 0; i < validReport.size(); i++) {
             cal.setTime(validReport.get(i).getDateAndTime());
@@ -85,7 +81,7 @@ public class historicalReportController implements Initializable {
      * @param _username username of current user
      */
     public static void setUsername(String _username) {
-        username = _username;
+        String username = _username;
     }
 
     /**
@@ -101,9 +97,11 @@ public class historicalReportController implements Initializable {
             int selectedYear = year.getSelectionModel().getSelectedItem();
             if(year.getValue() != null && loc.getValue() != null) {
                 List<PurityReport> reportList = WaterApplication.getPurityreportList();
-                ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
+                @SuppressWarnings("UnusedAssignment") ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
                 for (PurityReport purityReport: reportList) {
+                    //noinspection deprecation
                     if ((purityReport.getDateAndTime().getYear() + 1900) == selectedYear) {
+                        //noinspection deprecation
                         map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);
                         createVirusMap();
                         createContaminationMap();

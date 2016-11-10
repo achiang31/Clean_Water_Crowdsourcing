@@ -145,11 +145,7 @@ public class reportController {
             }
         }
         errorMessage.setText(errorMessageStr);
-        if (errorMessageStr.length() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return errorMessageStr.length() == 0;
     }
 
     public static boolean validateLat(String lat) {
@@ -157,11 +153,7 @@ public class reportController {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double latitude = Double.parseDouble(lat);
-        if (latitude < -90.0 || latitude > 90.0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(latitude < -90.0 || latitude > 90.0);
 
     }
 
@@ -170,11 +162,7 @@ public class reportController {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double longitude = Double.parseDouble(lon);
-        if (longitude < - 180.0 || longitude > 180.0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(longitude < -180.0 || longitude > 180.0);
     }
 
     /**

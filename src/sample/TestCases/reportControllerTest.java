@@ -10,10 +10,6 @@ import static org.junit.Assert.*;
  * Created by bigjohnlin on 11/9/2016.
  */
 public class reportControllerTest {
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void validateLatTestTrue() throws Exception {
@@ -36,8 +32,20 @@ public class reportControllerTest {
         assertFalse(reportController.validateLat("-123456"));
     }
     @Test
-    public void validateLong() throws Exception {
-
+    public void validateLongTest() throws Exception {
+        assertTrue(reportController.validateLong("0"));
+        assertTrue(reportController.validateLong("180"));
+        assertTrue(reportController.validateLong("-180"));
+        assertTrue(reportController.validateLong("90"));
+        assertTrue(reportController.validateLong("-90"));
+        assertFalse(reportController.validateLong("-181"));
+        assertFalse(reportController.validateLong("181"));
+        assertFalse(reportController.validateLong("123456"));
+        assertFalse(reportController.validateLong("-123456"));
     }
-
+    @Test (expected = IllegalArgumentException.class)
+    public void validateLongTestException() throws Exception {
+        reportController.validateLong("");
+        reportController.validateLong(null);
+    }
 }

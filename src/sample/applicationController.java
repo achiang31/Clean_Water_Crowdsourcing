@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -20,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,7 +112,7 @@ public class applicationController {
      */
     @FXML
     private void createPurityReport(ActionEvent event) throws IOException {
-        if (account.getAbbrType() == "WK" || account.getAbbrType() == "MN") {
+        if (Objects.equals(account.getAbbrType(), "WK") || Objects.equals(account.getAbbrType(), "MN")) {
             purityController.setUsername(username);
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent report = FXMLLoader.load(getClass().getResource("purityReport.fxml"));
@@ -137,7 +136,7 @@ public class applicationController {
      */
     @FXML
     private void viewPurityReport(ActionEvent event) throws IOException {
-        if (account.getAbbrType() == "MN") {
+        if (Objects.equals(account.getAbbrType(), "MN")) {
         reportController.setUsername(username);
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent report = FXMLLoader.load(getClass().getResource("viewPurityReports.fxml"));
@@ -234,11 +233,11 @@ public class applicationController {
                 File loading = new File("ACdata.json");
                 FileInputStream fis = new FileInputStream(loading);
                 byte[] data = new byte[(int) loading.length()];
+                //noinspection ResultOfMethodCallIgnored
                 fis.read(data);
                 fis.close();
                 String str = new String(data, "UTF-8");
-                applicationController instance = gs.fromJson(str, applicationController.class);
-                return instance;
+                return gs.fromJson(str, applicationController.class);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);

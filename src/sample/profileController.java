@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.util.Date;
 /**
  * Created by Alex on 10/2/16.
  */
-public class profileController {
+class profileController {
 
     @FXML
     private TextField firstName;
@@ -69,8 +68,11 @@ public class profileController {
             emailAddress.setText(profile.getEmailAddress());
             ID.setText(profile.getID());
             homeAddress.setText(profile.getHomeAddress());
+            //noinspection deprecation
             month.setText(Integer.toString(profile.getBirthday().getMonth() + 1));
+            //noinspection deprecation
             day.setText(Integer.toString(profile.getBirthday().getDate()));
+            //noinspection deprecation
             year.setText(Integer.toString(profile.getBirthday().getYear() + 1900));
         }
     }
@@ -138,6 +140,7 @@ public class profileController {
             errorMessageStr += "Empty birthday!\n";
         }
         try {
+            //noinspection deprecation
             birthday = new Date(Integer.parseInt(year.getText()) - 1900,
                     Integer.parseInt(month.getText()) - 1, Integer.parseInt(day.getText()));
         } catch (Exception e) {

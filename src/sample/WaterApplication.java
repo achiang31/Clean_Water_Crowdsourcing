@@ -1,19 +1,13 @@
 package sample;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
 import java.util.*;
@@ -25,11 +19,11 @@ import java.util.logging.Logger;
  */
 public class WaterApplication {
     private static WaterApplication instance = new WaterApplication();
-    private static Map<String, User> users = new HashMap<String, User>();
-    private static Map<Integer, Report> reports = new HashMap<Integer, Report>();
-    private static List<Report> reportList = new ArrayList<Report>();
-    private static Map<Integer, PurityReport> purityreports = new HashMap<Integer, PurityReport>();
-    private static List<PurityReport> purityreportList = new ArrayList<PurityReport>();
+    private static Map<String, User> users = new HashMap<>();
+    private static Map<Integer, Report> reports = new HashMap<>();
+    private static List<Report> reportList = new ArrayList<>();
+    private static Map<Integer, PurityReport> purityreports = new HashMap<>();
+    private static List<PurityReport> purityreportList = new ArrayList<>();
 
     /**
      * Add a new user to user list
@@ -114,6 +108,7 @@ public class WaterApplication {
                 Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
                 String gson = gs.toJson(this);
                 System.out.println(gson);
+                //noinspection SuspiciousMethodCalls
                 System.out.println(users.get(0));
                 out.print(gson);
             }
@@ -129,11 +124,11 @@ public class WaterApplication {
                 File loading = new File("WAdata.json");
                 FileInputStream fis = new FileInputStream(loading);
                 byte[] data = new byte[(int) loading.length()];
+                //noinspection ResultOfMethodCallIgnored
                 fis.read(data);
                 fis.close();
                 String str = new String(data, "UTF-8");
-                WaterApplication instance = gs.fromJson(str, WaterApplication.class);
-                return instance;
+                return gs.fromJson(str, WaterApplication.class);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);

@@ -41,7 +41,7 @@ public class registrationController {
     @FXML
     private Button cancel;
 
-    private ObservableList<String> accountTypeList = FXCollections.observableArrayList(
+    private final ObservableList<String> accountTypeList = FXCollections.observableArrayList(
             AccountType.US.getAccountType(), AccountType.WK.getAccountType(),
             AccountType.MN.getAccountType(), AccountType.AD.getAccountType());
 
@@ -66,7 +66,7 @@ public class registrationController {
             AccountType account = determineAccountType(accountType);
             applicationController.setAccount(account);
             WaterApplication app = WaterApplication.getInstance();
-            app.addUser(account, username.getText(), password.getText());
+            WaterApplication.addUser(account, username.getText(), password.getText());
             app.saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
