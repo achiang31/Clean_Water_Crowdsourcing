@@ -40,6 +40,10 @@ public class loginController {
      */
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
+        WaterApplication persistence = WaterApplication.loadWaterApplication();
+        System.out.println(WaterApplication.getUsers());
+//        if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
+//                && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
         if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
                 && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
             applicationController.setUsername(username.getText());

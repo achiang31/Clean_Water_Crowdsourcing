@@ -3,11 +3,11 @@ package sample;
 /**
  * Created by Alex on 10/1/16.
  */
-public class User {
+class User {
 
-    private AccountType accountType;
+    private final AccountType accountType;
 
-    private String username;
+    private final String username;
 
     private String password;
 

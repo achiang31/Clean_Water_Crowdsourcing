@@ -14,7 +14,7 @@ public enum Condition {
      *
      * @param name   name of condition
      */
-    private Condition(final String name) {
+    Condition(final String name) {
         this.name = name;
     }
 

@@ -1,6 +1,7 @@
 package sample;
 
 
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by bigjohnlin on 9/18/2016.
@@ -38,6 +47,9 @@ public class applicationController {
 
     @FXML
     private Button viewPurityReport;
+
+    @FXML
+    private Button callHistoricalReport;
 
     private static String username;
     private static AccountType account;
@@ -67,6 +79,7 @@ public class applicationController {
      */
     @FXML
     private void logoffAction(ActionEvent event) throws IOException {
+
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent application = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         Stage stage = new Stage();
@@ -99,7 +112,7 @@ public class applicationController {
      */
     @FXML
     private void createPurityReport(ActionEvent event) throws IOException {
-        if (account.getAbbrType() == "WK" || account.getAbbrType() == "MN") {
+        if (Objects.equals(account.getAbbrType(), "WK") || Objects.equals(account.getAbbrType(), "MN")) {
             purityController.setUsername(username);
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent report = FXMLLoader.load(getClass().getResource("purityReport.fxml"));
@@ -123,7 +136,7 @@ public class applicationController {
      */
     @FXML
     private void viewPurityReport(ActionEvent event) throws IOException {
-        if (account.getAbbrType() == "MN") {
+        if (Objects.equals(account.getAbbrType(), "MN")) {
         reportController.setUsername(username);
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent report = FXMLLoader.load(getClass().getResource("viewPurityReports.fxml"));
@@ -164,11 +177,25 @@ public class applicationController {
      */
     @FXML
     private void viewAvailabilityAction(ActionEvent event) throws IOException {
+        ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent report = FXMLLoader.load(getClass().getResource("mapview.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(report);
         stage.setScene(scene);
         stage.setTitle("Map");
+        stage.show();
+    }
+
+    @FXML
+    private void callHistRep(ActionEvent event) throws IOException {
+        historicalReportController.setUsername(username);
+        historicalReportController.setAccount(account);
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+        Parent historyReport = FXMLLoader.load(getClass().getResource("historicalReport.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(historyReport);
+        stage.setScene(scene);
+        stage.setTitle("LocVirOrContYear");
         stage.show();
     }
 
@@ -184,5 +211,40 @@ public class applicationController {
      * @param _account accountType of current user
      */
     public static void setAccount(AccountType _account){ account = _account; }
+
+
+
+    public void saveApplicationController() {
+        try {
+            try (PrintWriter out = new PrintWriter(new File("ACdata.json"))) {
+                Gson gs = new Gson();
+                String gson = gs.toJson(this);
+                out.println(gson);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static applicationController loadApplicationController() {
+        try {
+            try (BufferedReader br = new BufferedReader(new FileReader("ACdata.json"))) {
+                Gson gs = new Gson();
+                File loading = new File("ACdata.json");
+                FileInputStream fis = new FileInputStream(loading);
+                byte[] data = new byte[(int) loading.length()];
+                //noinspection ResultOfMethodCallIgnored
+                fis.read(data);
+                fis.close();
+                String str = new String(data, "UTF-8");
+                return gs.fromJson(str, applicationController.class);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
 

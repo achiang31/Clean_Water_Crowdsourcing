@@ -44,8 +44,6 @@ public class uneditablePurityReportController {
     @FXML
     private Label conditionPPM;
 
-    private Profile profile;
-
     private PurityReport report;
 
     /**
@@ -54,14 +52,14 @@ public class uneditablePurityReportController {
     @FXML
     private void initialize() {
         report = WaterApplication.getPurityreports().get(purityReportViewController.getReportNum());
-        profile = report.getProfile();
+        Profile profile = report.getProfile();
         loc.setText(report.getLocation().getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(report.getReportNum()));
         dateAndTime.setText(report.getDateAndTime().toString());
         condition.setText(report.getOverallCondition().toString());
         virus.setText(Integer.toString(report.getVirusPPM()));
-        conditionPPM.setText(Integer.toString(report.getConditionPPM()));
+        conditionPPM.setText(Integer.toString(report.getContaminatePPM()));
     }
 
     /**

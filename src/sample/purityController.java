@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by bigjohnlin on 10/24/2016.
  */
-public class purityController {
+class purityController {
     @FXML
     private Label reporter;
 
@@ -212,7 +212,6 @@ public class purityController {
      */
     private String descriptionFormatter() {
         String reporter = profile.getFirstName() + " " + profile.getLastName();
-        String descrip = reporter + " submitted this report on: " + date;
-        return descrip;
+        return reporter + " submitted this report on: " + date;
     }
 }

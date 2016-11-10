@@ -1,7 +1,6 @@
 package sample;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class Facade {
     public static Facade getInstance() { return instance; }
 
     //this is our simple model
-    private List<Location> locations = new ArrayList<>();
+    private final List<Location> locations = new ArrayList<>();
 
 
 

@@ -145,11 +145,24 @@ public class reportController {
             }
         }
         errorMessage.setText(errorMessageStr);
-        if (errorMessageStr.length() == 0) {
-            return true;
-        } else {
-            return false;
+        return errorMessageStr.length() == 0;
+    }
+
+    public static boolean validateLat(String lat) {
+        if (lat == null || lat.equals("")) {
+            throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
+        double latitude = Double.parseDouble(lat);
+        return !(latitude < -90.0 || latitude > 90.0);
+
+    }
+
+    public static boolean validateLong(String lon) {
+        if (lon == null || lon.equals("")) {
+            throw new IllegalArgumentException("Cannot have null lat or empty String");
+        }
+        double longitude = Double.parseDouble(lon);
+        return !(longitude < -180.0 || longitude > 180.0);
     }
 
     /**

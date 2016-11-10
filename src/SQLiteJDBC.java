@@ -1,15 +1,13 @@
-/**
- * Created by Alan on 11/1/2016.
- */
 import java.sql.*;
 
-public class SQLiteJDBC
+class SQLiteJDBC
 {
     public static void main( String args[] )
     {
-        Connection c = null;
+        @SuppressWarnings("UnusedAssignment") Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
+            //noinspection UnusedAssignment
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

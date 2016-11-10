@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -32,7 +35,9 @@ public class reportViewController {
      */
     @FXML
     private void initialize() {
-        listReports.setItems(WaterApplication.getReportsList());
+        List<Report> reportList = WaterApplication.getReportsList();
+        ObservableList<Report> obsReportList = FXCollections.observableList(reportList);
+        listReports.setItems(obsReportList);
         listReports.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

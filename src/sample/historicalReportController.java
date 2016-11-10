@@ -1,7 +1,8 @@
 package sample;
 
-import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ import static sample.AccountType.MN;
 /**
  * Created by biggerSean on 11/1/2016.
  */
-public class historicalReportController implements Initializable {
+class historicalReportController implements Initializable {
     @FXML
     private ComboBox<String> VorC;
 
@@ -39,36 +39,38 @@ public class historicalReportController implements Initializable {
     @FXML
     private Label plzSelect;
 
-    private static String username;
+    private static final ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
+    private static AccountType account;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get all the valid years//
-        ObservableList<Report> validReport = WaterApplication.getReportsList();
+        List<PurityReport> validReport = WaterApplication.getPurityreportList();
+        @SuppressWarnings("UnusedAssignment") ObservableList<PurityReport> obsReportList = FXCollections.observableList(validReport);
         Collection<Integer> allYears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
+        for (int a = 0; a < 12; a++) {
+            map.put(a, new ArrayList<>());
+        }
         for (int i = 0; i < validReport.size(); i++) {
             cal.setTime(validReport.get(i).getDateAndTime());
             int yea = cal.get(Calendar.YEAR);
-            allYears.add(yea);
+            if (!allYears.contains(yea)) {
+                allYears.add(yea);
+            }
         }
-
-
 
         ArrayList<Location> allLocs = new ArrayList<>();
         for (int i = 0; i < validReport.size(); i++) {
-            allLocs.add(validReport.get(i).getLocation());
+            if (!allLocs.contains(validReport.get(i).getLocation())) {
+                allLocs.add(validReport.get(i).getLocation());
+            }
         }
-
-
-
         //get all the valid locations//
-
-
-
         VorC.getItems().removeAll(VorC.getItems());
         VorC.getItems().addAll("Virus", "Contamination");
-        VorC.getSelectionModel().select("Virus");
         year.getItems().removeAll(year.getItems());
         year.getItems().addAll(allYears);
         loc.getItems().removeAll(loc.getItems());
@@ -79,7 +81,7 @@ public class historicalReportController implements Initializable {
      * @param _username username of current user
      */
     public static void setUsername(String _username) {
-        username = _username;
+        String username = _username;
     }
 
     /**
@@ -90,12 +92,26 @@ public class historicalReportController implements Initializable {
      */
     @FXML
     private void showGraph(ActionEvent event) throws IOException {
-        if (WaterApplication.getAccountType2(username) == MN) {
+        if (account == MN) {
             Stage stage = new Stage();
+            int selectedYear = year.getSelectionModel().getSelectedItem();
             if(year.getValue() != null && loc.getValue() != null) {
-//                ArrayList virus = WaterApplication.getVirusOfTheReport(WaterApplication.getPurityreportList());
-//                ArrayList contamination = WaterApplication.getContaminationOfTheReport();
-//                new historicalReport(year.getValue(), loc.getValue(), VorC.getValue(), ArrayList virus, ArrayList contamination).start(stage);
+                List<PurityReport> reportList = WaterApplication.getPurityreportList();
+                @SuppressWarnings("UnusedAssignment") ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
+                for (PurityReport purityReport: reportList) {
+                    //noinspection deprecation
+                    if ((purityReport.getDateAndTime().getYear() + 1900) == selectedYear) {
+                        //noinspection deprecation
+                        map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);
+                        createVirusMap();
+                        createContaminationMap();
+                    }
+                }
+                if (VorC.getSelectionModel().getSelectedItem().equals("Virus")) {
+                    new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), virusMap).start(stage);
+                } else {
+                   new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), contaminationMap).start(stage);
+                }
             } else {
                 plzSelect.setText("Please select year and location");
             }
@@ -104,6 +120,53 @@ public class historicalReportController implements Initializable {
         }
     }
 
+    private void createVirusMap() {
+        for (Map.Entry<Integer, List<PurityReport>> entry: map.entrySet()) {
+            int month = entry.getKey();
+            List<PurityReport> list = entry.getValue();
+            if (list.size() > 1) {
+                int average = averageVirus(list);
+                virusMap.put(month, average);
+            } else if (list.size() == 1) {
+                virusMap.put(month, list.get(0).getVirusPPM());
+            } else {
+                virusMap.put(month, 0);
+            }
+        }
+    }
+
+    private void createContaminationMap() {
+        for (Map.Entry<Integer, List<PurityReport>> entry: map.entrySet()) {
+            int month = entry.getKey();
+            List<PurityReport> list = entry.getValue();
+            if (list.size() > 1) {
+                int average = averageContamination(list);
+                contaminationMap.put(month, average);
+            } else if (list.size() == 1) {
+                contaminationMap.put(month, list.get(0).getVirusPPM());
+            } else {
+                contaminationMap.put(month, 0);
+            }
+        }
+    }
+
+    private int averageVirus(List<PurityReport> reports) {
+        int average = 0;
+        int size = reports.size();
+        for (PurityReport rep: reports) {
+            average += rep.getVirusPPM();
+        }
+        return average/size;
+    }
+
+    private int averageContamination(List<PurityReport> reports) {
+        int average = 0;
+        int size = reports.size();
+        for (PurityReport rep: reports) {
+            average += rep.getContaminatePPM();
+        }
+        return average/size;
+    }
 
     /**
      * Handle when "goBack" button is pressed --> display Water Application
@@ -120,5 +183,10 @@ public class historicalReportController implements Initializable {
         stage.setTitle("Water Application");
         stage.show();
     }
+    /**
+     * Set the account type of current user operating the application
+     * @param _account accountType of current user
+     */
+    public static void setAccount(AccountType _account){ account = _account; }
 }
 

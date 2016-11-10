@@ -14,7 +14,7 @@ public enum OverallCondition {
      *
      * @param name   name of Overall condition
      */
-    private OverallCondition(final String name) {
+    OverallCondition(final String name) {
         this.name = name;
     }
 

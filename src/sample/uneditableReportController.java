@@ -8,12 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by xingxing on 10/5/16.
@@ -43,8 +40,6 @@ public class uneditableReportController {
     @FXML
     private Label condition;
 
-    private Profile profile;
-
     private Report report;
 
     /**
@@ -53,7 +48,7 @@ public class uneditableReportController {
     @FXML
     private void initialize() {
         report = WaterApplication.getReports().get(reportViewController.getReportNum());
-        profile = report.getProfile();
+        Profile profile = report.getProfile();
         loc.setText(report.getLocation().getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(reportViewController.getReportNum()));
