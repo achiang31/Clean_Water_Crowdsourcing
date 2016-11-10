@@ -51,7 +51,8 @@ public class historicalReportController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get all the valid years//
-        ObservableList<PurityReport> validReport = WaterApplication.getPurityreportList();
+        List<PurityReport> validReport = WaterApplication.getPurityreportList();
+        ObservableList<PurityReport> obsReportList = FXCollections.observableList(validReport);
         Collection<Integer> allYears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         for (int a = 0; a < 12; a++) {
@@ -99,7 +100,8 @@ public class historicalReportController implements Initializable {
             Stage stage = new Stage();
             int selectedYear = year.getSelectionModel().getSelectedItem();
             if(year.getValue() != null && loc.getValue() != null) {
-                ObservableList<PurityReport> reportList = WaterApplication.getPurityreportList();
+                List<PurityReport> reportList = WaterApplication.getPurityreportList();
+                ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
                 for (PurityReport purityReport: reportList) {
                     if ((purityReport.getDateAndTime().getYear() + 1900) == selectedYear) {
                         map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);

@@ -1,5 +1,6 @@
 package sample;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -14,10 +15,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.lang.reflect.Modifier;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,11 +24,12 @@ import java.util.logging.Logger;
  * Created by Alex on 10/1/16.
  */
 public class WaterApplication {
-    private static ObservableMap<String, User> users = FXCollections.observableHashMap();
-    private static ObservableMap<Integer, Report> reports = FXCollections.observableHashMap();
-    private static ObservableList<Report> reportList = FXCollections.observableArrayList();
-    private  static ObservableMap<Integer, PurityReport> purityreports = FXCollections.observableHashMap();
-    private static ObservableList<PurityReport> purityreportList = FXCollections.observableArrayList();
+    private static WaterApplication instance = new WaterApplication();
+    private static Map<String, User> users = new HashMap<String, User>();
+    private static Map<Integer, Report> reports = new HashMap<Integer, Report>();
+    private static List<Report> reportList = new ArrayList<Report>();
+    private static Map<Integer, PurityReport> purityreports = new HashMap<Integer, PurityReport>();
+    private static List<PurityReport> purityreportList = new ArrayList<PurityReport>();
 
     /**
      * Add a new user to user list
@@ -75,7 +75,7 @@ public class WaterApplication {
      * Get user list of the application
      * @return Map of users <username, User> of application
      */
-    public static ObservableMap<String, User> getUsers() {
+    public static Map<String, User> getUsers() {
         return users;
     }
 
@@ -83,7 +83,7 @@ public class WaterApplication {
      * Get report list of the application
      * @return Map of reports <reportNum, Report> of application
      */
-    public static ObservableMap<Integer, Report> getReports() {
+    public static Map<Integer, Report> getReports() {
         return reports;
     }
 
@@ -91,12 +91,12 @@ public class WaterApplication {
      * Get purity report list of the application
      * @return Map of purity reports <reportNum, Report> of application
      */
-    public static ObservableMap<Integer, PurityReport> getPurityreports() { return purityreports; }
+    public static Map<Integer, PurityReport> getPurityreports() { return purityreports; }
     /**
      * Get report list of the application
      * @return List of reports <reportNum, Report> of application
      */
-    public static ObservableList<Report> getReportsList() {
+    public static List<Report> getReportsList() {
         return reportList;
     }
 
@@ -104,15 +104,17 @@ public class WaterApplication {
      * Get purity report list of the application
      * @return List of purity reports <reportNum, Report> of application
      */
-    public static ObservableList<PurityReport> getPurityreportList() { return purityreportList; }
+    public static List<PurityReport> getPurityreportList() { return purityreportList; }
 
-
+    public static WaterApplication getInstance() { return instance; }
 
     public void saveWaterApplication() {
         try {
             try (PrintWriter out = new PrintWriter(new File("WAdata.json"))) {
-                Gson gs = new Gson();
+                Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
                 String gson = gs.toJson(this);
+                System.out.println(gson);
+                System.out.println(users.get(0));
                 out.print(gson);
             }
         } catch (FileNotFoundException ex) {
@@ -123,7 +125,7 @@ public class WaterApplication {
     public static WaterApplication loadWaterApplication() {
         try {
             try (BufferedReader br = new BufferedReader(new FileReader("WAdata.json"))) {
-                Gson gs = new Gson();
+                Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
                 File loading = new File("WAdata.json");
                 FileInputStream fis = new FileInputStream(loading);
                 byte[] data = new byte[(int) loading.length()];

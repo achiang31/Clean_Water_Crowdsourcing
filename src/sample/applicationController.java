@@ -80,6 +80,7 @@ public class applicationController {
      */
     @FXML
     private void logoffAction(ActionEvent event) throws IOException {
+
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent application = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         Stage stage = new Stage();

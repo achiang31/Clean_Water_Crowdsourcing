@@ -65,7 +65,9 @@ public class registrationController {
             String accountType = accountTypeBox.getSelectionModel().getSelectedItem().toString();
             AccountType account = determineAccountType(accountType);
             applicationController.setAccount(account);
-            WaterApplication.addUser(account, username.getText(), password.getText());
+            WaterApplication app = WaterApplication.getInstance();
+            app.addUser(account, username.getText(), password.getText());
+            app.saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
             Stage stage = new Stage();

@@ -152,6 +152,31 @@ public class reportController {
         }
     }
 
+    public static boolean validateLat(String lat) {
+        if (lat == null || lat.equals("")) {
+            throw new IllegalArgumentException("Cannot have null lat or empty String");
+        }
+        double latitude = Double.parseDouble(lat);
+        if (latitude < -90.0 || latitude > 90.0) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    public static boolean validateLong(String lon) {
+        if (lon == null || lon.equals("")) {
+            throw new IllegalArgumentException("Cannot have null lat or empty String");
+        }
+        double longitude = Double.parseDouble(lon);
+        if (longitude < - 180.0 || longitude > 180.0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * Handle when "Cancel" button is pressed --> don't save changes to report --> display Water Application
      * @param event Clicking "cancel" button

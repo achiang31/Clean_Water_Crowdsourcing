@@ -88,6 +88,7 @@ public class profileController {
             Profile profile = new Profile(firstName.getText(), lastName.getText(), emailAddress.getText(),
                     ID.getText(), homeAddress.getText(), birthday);
             WaterApplication.setProfile(username, profile);
+            WaterApplication.getInstance().saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
