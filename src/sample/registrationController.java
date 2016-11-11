@@ -78,7 +78,7 @@ public class registrationController {
         }
     }
 
-    private AccountType determineAccountType(String name) {
+    public static AccountType determineAccountType(String name) {
         if (name.equals("User")) {
             return AccountType.US;
         } else if (name.equals("Worker")) {
