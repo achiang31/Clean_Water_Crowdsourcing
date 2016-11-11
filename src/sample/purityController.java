@@ -86,7 +86,7 @@ public class purityController {
             String title = "Report " + reportNum;
             String descrip = descriptionFormatter();
             Location location = new Location(latitude, longitude, lat.getText() + "," + lon.getText(), title, descrip);
-            PurityReport pureReport = WaterApplication.addPurityReport(location);
+            PurityReport pureReport = new PurityReport(location);
             pureReport.setUserProfile(profile);
             pureReport.setDateAndTime(date);
             pureReport.setReportNum(reportNum);
@@ -94,6 +94,9 @@ public class purityController {
             pureReport.setOverallCondition((conditionButton.getText().toUpperCase()));
             pureReport.setConditionPPM(Integer.parseInt(contPPM.getText()));
             pureReport.setVirusPPM(Integer.parseInt(virusPPM.getText()));
+            WaterApplication app = WaterApplication.getInstance();
+            app.addPurityReport(pureReport);
+            app.saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();

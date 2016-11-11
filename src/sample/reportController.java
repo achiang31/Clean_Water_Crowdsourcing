@@ -83,12 +83,15 @@ public class reportController {
             String title = "Report " + reportNum;
             String descrip = descriptionFormatter();
             Location location = new Location(latitude, longitude, loc.getText(), title, descrip);
-            Report report = WaterApplication.addReport(location);
+            Report report = new Report(location);
             report.setUserProfile(profile);
             report.setDateAndTime(date);
             report.setReportNum(reportNum);
             report.setType(typeButton.getText().toUpperCase());
             report.setCondition((conditionButton.getText().toUpperCase()));
+            WaterApplication app = WaterApplication.getInstance();
+            app.addReport(report);
+            app.saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();

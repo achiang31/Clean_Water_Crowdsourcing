@@ -43,21 +43,21 @@ public class WaterApplication {
     }
 
     /**
-     * Add a new user to report list
-     * @param location location of the report
+     * Add a new report to report list
+     * @param report  report to be added
      */
-    public static Report addReport(Location location) {
-        Report newReport = new Report(location);
-        reports.put(reportController.reportNum,newReport);
-        reportList.add(newReport);
-        return newReport;
+    public static void addReport(Report report) {
+        reports.put(report.getReportNum(), report);
+        reportList.add(report);
     }
 
-    public static PurityReport addPurityReport(Location location) {
-        PurityReport purityReport = new PurityReport(location);
-        purityreports.put(purityController.reportNum,purityReport);
-        purityreportList.add(purityReport);
-        return purityReport;
+    /**
+     * Add a new purity report to purity report list
+     * @param report  report to be added
+     */
+    public static void addPurityReport(PurityReport report) {
+        purityreports.put(report.getReportNum(),report);
+        purityreportList.add(report);
     }
 
     /**
