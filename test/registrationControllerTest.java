@@ -4,6 +4,8 @@ import sample.AccountType;
 import sample.registrationController;
 import static org.junit.Assert.*;
 
+//Xingxing
+
 public class registrationControllerTest {
     @Before
     public void setUp() {
