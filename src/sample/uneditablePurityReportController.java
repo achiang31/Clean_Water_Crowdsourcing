@@ -44,17 +44,16 @@ public class uneditablePurityReportController {
     @FXML
     private Label conditionPPM;
 
-    private Profile profile;
-
     private PurityReport report;
 
     /**
      * initialize the Purity Report with automatic generated info of current user
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
         report = WaterApplication.getPurityreports().get(purityReportViewController.getReportNum());
-        profile = report.getProfile();
+        Profile profile = report.getProfile();
         loc.setText(report.getLocation().getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(report.getReportNum()));

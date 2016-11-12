@@ -38,6 +38,7 @@ public class loginController {
      * @param event Clicking "Login" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         WaterApplication persistence = WaterApplication.loadWaterApplication();

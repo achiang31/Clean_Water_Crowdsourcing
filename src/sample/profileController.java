@@ -60,6 +60,7 @@ public class profileController {
     /**
      * Get and display the Profile of current user
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
         Profile profile = WaterApplication.getUsers().get(username).getProfile();
@@ -81,6 +82,7 @@ public class profileController {
      * @param event Clicking "OK" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void OKAction(ActionEvent event) throws IOException {
         if (isInputValid()) {

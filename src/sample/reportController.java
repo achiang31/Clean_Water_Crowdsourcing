@@ -76,6 +76,7 @@ public class reportController {
      * @param event Clicking "submitButton" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod"})
     @FXML
     private void submitAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -105,6 +106,7 @@ public class reportController {
      * Test if user input for profile is valid, if not, display error message on screen
      * @return if input is valid or not
      */
+    @SuppressWarnings("MagicNumber")
     private boolean isInputValid() {
         String errorMessageStr = "";
         typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
@@ -148,36 +150,26 @@ public class reportController {
             }
         }
         errorMessage.setText(errorMessageStr);
-        if (errorMessageStr.length() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return errorMessageStr.length() == 0;
     }
 
+    @SuppressWarnings("MagicNumber")
     public static boolean validateLat(String lat) {
         if (lat == null || lat.equals("")) {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double latitude = Double.parseDouble(lat);
-        if (latitude < -90.0 || latitude > 90.0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(latitude < -90.0 || latitude > 90.0);
 
     }
 
+    @SuppressWarnings("MagicNumber")
     public static boolean validateLong(String lon) {
         if (lon == null || lon.equals("")) {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double longitude = Double.parseDouble(lon);
-        if (longitude < - 180.0 || longitude > 180.0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(longitude < -180.0 || longitude > 180.0);
     }
 
     /**

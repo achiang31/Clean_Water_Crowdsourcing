@@ -36,6 +36,7 @@ public class purityReportViewController {
         ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
         listPurityReports.setItems(obsReportList);
         listPurityReports.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {

@@ -45,9 +45,9 @@ public class historicalReportController implements Initializable {
     private static ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
     private static ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
     private static ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
-    private static String username;
     private static AccountType account;
 
+    @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get all the valid years//
@@ -56,7 +56,7 @@ public class historicalReportController implements Initializable {
         Collection<Integer> allYears = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         for (int a = 0; a < 12; a++) {
-            map.put(a, new ArrayList<PurityReport>());
+            map.put(a, new ArrayList<>());
         }
         for (int i = 0; i < validReport.size(); i++) {
             cal.setTime(validReport.get(i).getDateAndTime());
@@ -66,7 +66,7 @@ public class historicalReportController implements Initializable {
             }
         }
 
-        ArrayList<Location> allLocs = new ArrayList<>();
+        Collection<Location> allLocs = new ArrayList<>();
         for (int i = 0; i < validReport.size(); i++) {
             if (!allLocs.contains(validReport.get(i).getLocation())) {
                 allLocs.add(validReport.get(i).getLocation());
@@ -85,7 +85,7 @@ public class historicalReportController implements Initializable {
      * @param _username username of current user
      */
     public static void setUsername(String _username) {
-        username = _username;
+        String username = _username;
     }
 
     /**
@@ -94,6 +94,7 @@ public class historicalReportController implements Initializable {
      * @param event Clicking "plot" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+
     @FXML
     private void showGraph(ActionEvent event) throws IOException {
         if (account == MN) {
@@ -152,7 +153,7 @@ public class historicalReportController implements Initializable {
         }
     }
 
-    private int averageVirus(List<PurityReport> reports) {
+    private int averageVirus(Collection<PurityReport> reports) {
         int average = 0;
         int size = reports.size();
         for (PurityReport rep: reports) {
@@ -161,7 +162,7 @@ public class historicalReportController implements Initializable {
         return average/size;
     }
 
-    private int averageContamination(List<PurityReport> reports) {
+    private int averageContamination(Collection<PurityReport> reports) {
         int average = 0;
         int size = reports.size();
         for (PurityReport rep: reports) {

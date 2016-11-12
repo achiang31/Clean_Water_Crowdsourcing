@@ -79,6 +79,7 @@ public class purityController {
      * @param event Clicking "submitAction" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod"})
     @FXML
     private void submitAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -110,6 +111,7 @@ public class purityController {
      * Test if user input for purity report is valid, if not, display error message on screen
      * @return if input is valid or not
      */
+    @SuppressWarnings("MagicNumber")
     private boolean isInputValid() {
         String errorMessageStr = "";
         if (lat.getText() == null || lat.getText().length() == 0) {

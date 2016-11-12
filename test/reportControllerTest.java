@@ -12,6 +12,7 @@ public class reportControllerTest {
 
     }
 
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLatTestTrue() throws Exception {
         assertTrue(reportController.validateLat("0"));
@@ -25,6 +26,7 @@ public class reportControllerTest {
         reportController.validateLat("");
         reportController.validateLat(null);
     }
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLatTestFalse() throws Exception {
         assertFalse(reportController.validateLat("-91"));

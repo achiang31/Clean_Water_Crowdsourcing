@@ -10,6 +10,7 @@ public class registrationControllerTest {
     @Before
     public void setUp() {
     }
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public void testAccountType() {
         assertEquals(registrationController.determineAccountType("User"), AccountType.US);

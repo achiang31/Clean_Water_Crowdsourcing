@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class registrationController {
     @FXML
-    private ComboBox accountTypeBox;
+    private ComboBox<String> accountTypeBox;
 
     @FXML
     private TextField username;
@@ -58,6 +58,7 @@ public class registrationController {
      * @param event Clicking "Register" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {

@@ -3,6 +3,7 @@
  */
 import java.sql.*;
 
+@SuppressWarnings("UtilityClass")
 public class SQLiteJDBC
 {
     public static void main( String args[] )

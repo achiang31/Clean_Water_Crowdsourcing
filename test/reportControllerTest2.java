@@ -18,6 +18,7 @@ public class reportControllerTest2 {
 
     }
 
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLongTestTrue() throws Exception {
         assertTrue(reportController.validateLong("0"));
@@ -43,6 +44,7 @@ public class reportControllerTest2 {
         reportController.validateLong("Hiryuugekizokushintenraihou");
     }
 
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLongTestFalse() throws Exception {
         assertFalse(reportController.validateLong("181"));

@@ -39,6 +39,7 @@ public class reportViewController {
         ObservableList<Report> obsReportList = FXCollections.observableList(reportList);
         listReports.setItems(obsReportList);
         listReports.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {

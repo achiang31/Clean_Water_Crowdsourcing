@@ -43,17 +43,16 @@ public class uneditableReportController {
     @FXML
     private Label condition;
 
-    private Profile profile;
-
     private Report report;
 
     /**
      * initialize the Report with automatic generated info of current user
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
         report = WaterApplication.getReports().get(reportViewController.getReportNum());
-        profile = report.getProfile();
+        Profile profile = report.getProfile();
         loc.setText(report.getLocation().getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(reportViewController.getReportNum()));
