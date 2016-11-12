@@ -32,9 +32,5 @@ public class reportControllerTest {
         assertFalse(reportController.validateLat("123456"));
         assertFalse(reportController.validateLat("-123456"));
     }
-    @Test
-    public void validateLong() throws Exception {
-
-    }
 
 }
