@@ -45,8 +45,8 @@ public class reportControllerTest2 {
 
     @Test
     public void validateLongTestFalse() throws Exception {
-        assertFalse(reportController.validateLong("180"));
-        assertFalse(reportController.validateLong("-180"));
+        assertFalse(reportController.validateLong("181"));
+        assertFalse(reportController.validateLong("-181"));
         assertFalse(reportController.validateLong("1000000"));
         assertFalse(reportController.validateLong("-1000000"));
     }
