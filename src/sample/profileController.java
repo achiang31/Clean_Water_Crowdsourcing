@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -124,30 +123,30 @@ public class profileController {
      */
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if (firstName.getText() == null || firstName.getText().length() == 0) {
+        if ((firstName.getText() == null) || firstName.getText().isEmpty()) {
             errorMessageStr += "Empty first name!\n";
-        } else if (lastName.getText() == null || lastName.getText().length() == 0) {
+        } else if ((lastName.getText() == null) || lastName.getText().isEmpty()) {
             errorMessageStr += "Empty last name!\n";
-        } else if (emailAddress.getText() == null || emailAddress.getText().length() == 0) {
+        } else if ((emailAddress.getText() == null) || emailAddress.getText().isEmpty()) {
             errorMessageStr += "Empty email address!\n";
-        } else if (ID.getText() == null || ID.getText().length() == 0) {
+        } else if ((ID.getText() == null) || ID.getText().isEmpty()) {
             errorMessageStr += "Empty ID!\n";
-        } else if (homeAddress.getText() == null || homeAddress.getText().length() == 0) {
+        } else if ((homeAddress.getText() == null) || homeAddress.getText().isEmpty()) {
             errorMessageStr += "Empty home address!\n";
-        } else if (month.getText() == null || month.getText().length() == 0
-                || day.getText() == null || day.getText().length() == 0
-                || year.getText() == null || year.getText().length() == 0) {
+        } else if ((month.getText() == null) || month.getText().isEmpty()
+                || (day.getText() == null) || day.getText().isEmpty()
+                || (year.getText() == null) || year.getText().isEmpty()) {
             errorMessageStr += "Empty birthday!\n";
         }
         try {
             birthday = new Date(Integer.parseInt(year.getText()) - 1900,
                     Integer.parseInt(month.getText()) - 1, Integer.parseInt(day.getText()));
         } catch (Exception e) {
-            if (errorMessageStr.length() == 0) {
+            if (errorMessageStr.isEmpty()) {
                 errorMessageStr += "Not a valid birthday!";
             }
         }
-        if (errorMessageStr.length() == 0) {
+        if (errorMessageStr.isEmpty()) {
             return true;
         } else {
             errorMessage.setText(errorMessageStr);

@@ -6,7 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Calendar;
@@ -45,7 +51,7 @@ public class reportController {
 
     private static String username;
 
-    public static int reportNum;
+    private static int reportNum;
 
     private Profile profile;
 
@@ -115,7 +121,7 @@ public class reportController {
             errorMessageStr += "Must select a type!\n";
         } else if (conditionButton == null) {
             errorMessageStr += "Must select a condition!\n";
-        } else if (loc.getText() == null || loc.getText().length() == 0) {
+        } else if ((loc.getText() == null) || loc.getText().isEmpty()) {
             errorMessageStr += "Empty location!\n";
         } else {
             String location = loc.getText();
@@ -124,7 +130,7 @@ public class reportController {
                 String latitudeStr = tokens[0].trim();
                 try {
                     double latitude = Double.parseDouble(latitudeStr);
-                    if (latitude < -90.0 || latitude > 90.0) {
+                    if ((latitude < -90.0) || (latitude > 90.0)) {
                         errorMessageStr += "Invalid latitude!\n";
                     } else {
                         this.latitude = latitude;
@@ -139,7 +145,7 @@ public class reportController {
                 String longitudeStr = tokens[0].trim();
                 try {
                     double longitude = Double.parseDouble(longitudeStr);
-                    if (longitude < - 180.0 || longitude > 180.0) {
+                    if ((longitude < -180.0) || (longitude > 180.0)) {
                         errorMessageStr += "Invalid longitude!\n";
                     } else {
                         this.longitude = longitude;
@@ -150,26 +156,26 @@ public class reportController {
             }
         }
         errorMessage.setText(errorMessageStr);
-        return errorMessageStr.length() == 0;
+        return errorMessageStr.isEmpty();
     }
 
     @SuppressWarnings("MagicNumber")
     public static boolean validateLat(String lat) {
-        if (lat == null || lat.equals("")) {
+        if ((lat == null) || "".equals(lat)) {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double latitude = Double.parseDouble(lat);
-        return !(latitude < -90.0 || latitude > 90.0);
+        return !((latitude < -90.0) || (latitude > 90.0));
 
     }
 
     @SuppressWarnings("MagicNumber")
     public static boolean validateLong(String lon) {
-        if (lon == null || lon.equals("")) {
+        if ((lon == null) || "".equals(lon)) {
             throw new IllegalArgumentException("Cannot have null lat or empty String");
         }
         double longitude = Double.parseDouble(lon);
-        return !(longitude < -180.0 || longitude > 180.0);
+        return !((longitude < -180.0) || (longitude > 180.0));
     }
 
     /**

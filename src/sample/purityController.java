@@ -6,7 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,7 +50,7 @@ public class purityController {
 
     private static String username;
 
-    public static int reportNum;
+    private static int reportNum;
 
     private Profile profile;
 
@@ -114,12 +118,12 @@ public class purityController {
     @SuppressWarnings("MagicNumber")
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if (lat.getText() == null || lat.getText().length() == 0) {
+        if ((lat.getText() == null) || lat.getText().isEmpty()) {
             errorMessageStr += "Empty latitude!\n";
         } else {
             try {
                 double latitude = Double.parseDouble(lat.getText());
-                if (latitude < -90.0 || latitude > 90.0) {
+                if ((latitude < -90.0) || (latitude > 90.0)) {
                     errorMessageStr += "Invalid latitude!\n";
                 } else {
                     this.latitude = latitude;
@@ -128,13 +132,13 @@ public class purityController {
                 errorMessageStr += "Invalid latitude!\n";
             }
         }
-        if (errorMessageStr.length() == 0) {
-            if (lon.getText() == null || lon.getText().length() == 0) {
+        if (errorMessageStr.isEmpty()) {
+            if ((lon.getText() == null) || lon.getText().isEmpty()) {
                 errorMessageStr += "Empty longitude!\n";
             } else {
                 try {
                     double longitude = Double.parseDouble(lon.getText());
-                    if (longitude < -180.0 || longitude > 180.0) {
+                    if ((longitude < -180.0) || (longitude > 180.0)) {
                         errorMessageStr += "Invalid longitude!\n";
                     } else {
                         this.longitude = longitude;
@@ -144,8 +148,8 @@ public class purityController {
                 }
             }
         }
-        if (errorMessageStr.length() == 0) {
-            if (virusPPM.getText() == null || virusPPM.getText().length() == 0) {
+        if (errorMessageStr.isEmpty()) {
+            if ((virusPPM.getText() == null) || virusPPM.getText().isEmpty()) {
                 errorMessageStr += "Empty virus PPM!\n";
             } else {
                 try {
@@ -158,8 +162,8 @@ public class purityController {
                 }
             }
         }
-        if (errorMessageStr.length() == 0) {
-            if (contPPM.getText() == null || contPPM.getText().length() == 0) {
+        if (errorMessageStr.isEmpty()) {
+            if ((contPPM.getText() == null) || contPPM.getText().isEmpty()) {
                 errorMessageStr += "Empty contaminant PPM!\n";
             } else {
                 try {
@@ -172,13 +176,13 @@ public class purityController {
                 }
             }
         }
-        if (errorMessageStr.length() == 0) {
+        if (errorMessageStr.isEmpty()) {
             RadioButton overall = (RadioButton) OverallConditionGroup.getSelectedToggle();
             if (overall == null) {
                 errorMessageStr += "Must select an overall condition!\n";
             }
         }
-        if (errorMessageStr.length() == 0) {
+        if (errorMessageStr.isEmpty()) {
             return true;
         } else {
             errorMessage.setText(errorMessageStr);
@@ -217,7 +221,6 @@ public class purityController {
      */
     private String descriptionFormatter() {
         String reporter = profile.getFirstName() + " " + profile.getLastName();
-        String descrip = reporter + " submitted this report on: " + date;
-        return descrip;
+        return reporter + " submitted this report on: " + date;
     }
 }

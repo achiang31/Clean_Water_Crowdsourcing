@@ -56,8 +56,7 @@ public class Location {
 
     @Override
     public String toString() {
-        String latLong = "(" + latitude +", " + longitude + ")";
-        return latLong;
+        return "(" + latitude +", " + longitude + ")";
     }
     @Override
     public boolean equals(Object object) {
@@ -71,6 +70,6 @@ public class Location {
             return false;
         }
         Location l = (Location) object;
-        return Double.compare(latitude, l.latitude) == 0 && Double.compare(longitude, l.longitude) == 0;
+        return (Double.compare(latitude, l.latitude) == 0) && (Double.compare(longitude, l.longitude) == 0);
     }
 }

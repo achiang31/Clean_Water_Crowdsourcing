@@ -41,7 +41,7 @@ public class registrationController {
     @FXML
     private Button cancel;
 
-    private ObservableList<String> accountTypeList = FXCollections.observableArrayList(
+    private final ObservableList<String> accountTypeList = FXCollections.observableArrayList(
             AccountType.US.getAccountType(), AccountType.WK.getAccountType(),
             AccountType.MN.getAccountType(), AccountType.AD.getAccountType());
 
@@ -63,7 +63,7 @@ public class registrationController {
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
             profileController.setUsername(username.getText());
-            String accountType = accountTypeBox.getSelectionModel().getSelectedItem().toString();
+            String accountType = accountTypeBox.getSelectionModel().getSelectedItem();
             AccountType account = determineAccountType(accountType);
             applicationController.setAccount(account);
             WaterApplication app = WaterApplication.getInstance();
@@ -80,11 +80,11 @@ public class registrationController {
     }
 
     public static AccountType determineAccountType(String name) {
-        if (name.equals("User")) {
+        if ("User".equals(name)) {
             return AccountType.US;
-        } else if (name.equals("Worker")) {
+        } else if ("Worker".equals(name)) {
             return AccountType.WK;
-        } else if (name.equals("Manager")) {
+        } else if ("Manager".equals(name)) {
             return AccountType.MN;
         } else {
             return AccountType.AD;
@@ -114,16 +114,16 @@ public class registrationController {
         String errorMessage = "";
         if (accountTypeBox.getValue() == null) {
             errorMessage += "Empty account type!\n";
-        } else if (username.getText() == null || username.getText().length() == 0) {
+        } else if ((username.getText() == null) || username.getText().isEmpty()) {
             errorMessage += "Not a valid username!\n";
-        } else if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())) {
+        } else if ((WaterApplication.getUsers() != null) && WaterApplication.getUsers().containsKey(username.getText())) {
             errorMessage += "Username already exists!\n";
-        } else if (password.getText() == null || password.getText().length() == 0) {
+        } else if ((password.getText() == null) || password.getText().isEmpty()) {
             errorMessage += "Not a valid password!\n";
         } else if (!password.getText().equals(confirmPassword.getText())) {
             errorMessage += "Passwords don't match!\n";
         }
-        if (errorMessage.length() == 0) {
+        if (errorMessage.isEmpty()) {
             return true;
         } else {
             registerMessage.setText(errorMessage);

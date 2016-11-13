@@ -1,7 +1,9 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 /**
  * Created by Alan on 11/1/2016.
  */
-import java.sql.*;
 
 @SuppressWarnings("UtilityClass")
 public class SQLiteJDBC
@@ -13,10 +15,10 @@ public class SQLiteJDBC
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
         } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
+            e.printStackTrace();
+//            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+//            System.exit(0);
         }
-        System.out.println("Opened database successfully");
     }
 }
 

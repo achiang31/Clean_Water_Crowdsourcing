@@ -5,12 +5,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.stage.Stage;
 
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static javafx.application.Application.launch;
@@ -19,18 +15,16 @@ import static javafx.application.Application.launch;
  */
 
 public class historicalReport extends Application {
-    private String[] names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private final String[] names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     final int months = 12;
-    private int[] month = new int[months];
+    private final int[] month = new int[months];
 
-    private Integer yea;
-    private Map<Integer, Integer> map;
+    private final Integer yea;
+    private final Map<Integer, Integer> map;
 
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
     public historicalReport (Integer yea, Location loc, String a, Map<Integer, Integer> map) {
         this.yea = yea;
-        Location loc1 = loc;
-        String a1 = a;
         this.map = map;
     }
 
@@ -53,7 +47,7 @@ public class historicalReport extends Application {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String, Number> bc =
-                new BarChart<String, Number>(xAxis, yAxis);
+                new BarChart<>(xAxis, yAxis);
         bc.setTitle("PPM of the Selected Location by Month");
         xAxis.setLabel("Month");
         yAxis.setLabel("PPM");

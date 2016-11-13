@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.application.Application;
-import javafx.beans.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -14,12 +12,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 import static sample.AccountType.MN;
 
@@ -42,9 +44,9 @@ public class historicalReportController implements Initializable {
     @FXML
     private Label plzSelect;
 
-    private static ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
-    private static ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
-    private static ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, List<PurityReport>> map = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> virusMap = FXCollections.observableHashMap();
+    private static final ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
     private static AccountType account;
 
     @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
@@ -58,8 +60,8 @@ public class historicalReportController implements Initializable {
         for (int a = 0; a < 12; a++) {
             map.put(a, new ArrayList<>());
         }
-        for (int i = 0; i < validReport.size(); i++) {
-            cal.setTime(validReport.get(i).getDateAndTime());
+        for (PurityReport aValidReport1 : validReport) {
+            cal.setTime(aValidReport1.getDateAndTime());
             int yea = cal.get(Calendar.YEAR);
             if (!allYears.contains(yea)) {
                 allYears.add(yea);
@@ -67,11 +69,9 @@ public class historicalReportController implements Initializable {
         }
 
         Collection<Location> allLocs = new ArrayList<>();
-        for (int i = 0; i < validReport.size(); i++) {
-            if (!allLocs.contains(validReport.get(i).getLocation())) {
-                allLocs.add(validReport.get(i).getLocation());
-            }
-        }
+        validReport.stream().filter(aValidReport ->
+                !allLocs.contains(aValidReport.getLocation())).forEach(aValidReport ->
+                allLocs.add(aValidReport.getLocation()));
         //get all the valid locations//
         VorC.getItems().removeAll(VorC.getItems());
         VorC.getItems().addAll("Virus", "Contamination");
@@ -85,7 +85,6 @@ public class historicalReportController implements Initializable {
      * @param _username username of current user
      */
     public static void setUsername(String _username) {
-        String username = _username;
     }
 
     /**
@@ -100,17 +99,15 @@ public class historicalReportController implements Initializable {
         if (account == MN) {
             Stage stage = new Stage();
             int selectedYear = year.getSelectionModel().getSelectedItem();
-            if(year.getValue() != null && loc.getValue() != null) {
+            if((year.getValue() != null) && (loc.getValue() != null)) {
                 List<PurityReport> reportList = WaterApplication.getPurityreportList();
                 ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
-                for (PurityReport purityReport: reportList) {
-                    if ((purityReport.getDateAndTime().getYear() + 1900) == selectedYear) {
-                        map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);
-                        createVirusMap();
-                        createContaminationMap();
-                    }
-                }
-                if (VorC.getSelectionModel().getSelectedItem().equals("Virus")) {
+                reportList.stream().filter(purityReport -> (purityReport.getDateAndTime().getYear() + 1900) == selectedYear).forEach(purityReport -> {
+                    map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);
+                    createVirusMap();
+                    createContaminationMap();
+                });
+                if ("Virus".equals(VorC.getSelectionModel().getSelectedItem())) {
                     new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), virusMap).start(stage);
                 } else {
                    new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), contaminationMap).start(stage);

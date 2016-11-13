@@ -5,9 +5,9 @@ package sample;
  */
 public class User {
 
-    private AccountType accountType;
+    private final AccountType accountType;
 
-    private String username;
+    private final String username;
 
     private String password;
 

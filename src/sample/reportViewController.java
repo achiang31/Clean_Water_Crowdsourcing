@@ -44,7 +44,11 @@ public class reportViewController {
             public void handle(MouseEvent mouseEvent) {
                 try {
                     report = listReports.getSelectionModel().getSelectedItem();
-                    reportNum = report.getReportNum();
+                    if (report != null) {
+                        reportNum = report.getReportNum();
+                    } else {
+                        throw new IOException("No reports for this user"); //crashes if no reports
+                    }
                     ((Node) (mouseEvent.getSource())).getScene().getWindow().hide();
                     Parent uneditableReport = FXMLLoader.load(getClass().getResource("uneditableReport.fxml"));
                     Stage stage = new Stage();
@@ -54,7 +58,8 @@ public class reportViewController {
                     stage.show();
                 }
                 catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                    //System.out.println(e.getMessage());
                 }
             }
         });

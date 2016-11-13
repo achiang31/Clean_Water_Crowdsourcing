@@ -1,9 +1,6 @@
 package sample;
 
 /**
- * Created by bigjohnlin on 10/17/2016.
- */
-/**
  * Created by bigjohnlin on 9/12/2016.
  */
 public enum Type {

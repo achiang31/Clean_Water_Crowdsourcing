@@ -52,7 +52,7 @@ public class purityReportViewController {
                 }
                 catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
                 }
             }
         });

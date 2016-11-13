@@ -93,7 +93,7 @@
    </Label>
    <Label fx:id="reporter" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    <Label fx:id="reportNumber" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-   <RadioButton id="Bottled" fx:id="bottled" mnemonicParsing="false" text="Bottled" GridPane.columnIndex="1" GridPane.rowIndex="3">
+   <RadioButton id="Bottled" mnemonicParsing="false" text="Bottled" GridPane.columnIndex="1" GridPane.rowIndex="3">
       <GridPane.margin>
          <Insets left="25.0" />
       </GridPane.margin>

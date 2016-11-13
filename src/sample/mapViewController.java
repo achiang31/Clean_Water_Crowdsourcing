@@ -3,22 +3,21 @@ package sample;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
-import com.lynden.gmapsfx.javascript.object.*;
 
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.InfoWindow;
+import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import netscape.javascript.JSObject;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -78,8 +77,8 @@ public class mapViewController implements Initializable, MapComponentInitialized
         // now we communicate with the model to get all the locations for markers
         List<Report> reports = WaterApplication.getReportsList();
 
-        for (int i = 0; i < reports.size(); i++) {
-            Location l = reports.get(i).getLocation();
+        for (Report report : reports) {
+            Location l = report.getLocation();
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(l.getLatitude(), l.getLongitude());
 

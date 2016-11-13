@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.Objects;
+
 public enum AccountType {
 
     US ("User", "US"),
@@ -20,11 +22,11 @@ public enum AccountType {
      */
     AccountType(String ptype) {
         accountType = ptype;
-        if (ptype == "User") {
+        if (Objects.equals(ptype, "User")) {
             abbrType = "US";
-        } else if (ptype == "Worker") {
+        } else if (Objects.equals(ptype, "Worker")) {
             abbrType = "WK";
-        } else if (ptype == "Manager") {
+        } else if (Objects.equals(ptype, "Manager")) {
             abbrType = "MN";
         } else {
             abbrType = "AD";
