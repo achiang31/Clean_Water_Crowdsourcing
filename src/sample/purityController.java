@@ -71,6 +71,8 @@ public class purityController {
      */
     @FXML
     private void initialize() {
+        WaterApplication persist = WaterApplication.loadWaterApplication();
+        reportNum = persist.getPurityreportList().size();
         profile = WaterApplication.getUsers().get(username).getProfile();
         reporter.setText(profile.getFirstName() + " " + profile.getLastName());
         reportNumber.setText(Integer.toString(reportNum + 1));

@@ -32,7 +32,8 @@ public class purityReportViewController {
      */
     @FXML
     private void initialize() {
-        List<PurityReport> reportList = WaterApplication.getPurityreportList();
+        WaterApplication persist = WaterApplication.loadWaterApplication();
+        List<PurityReport> reportList = persist.getPurityreportList();
         ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
         listPurityReports.setItems(obsReportList);
         listPurityReports.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -52,7 +53,6 @@ public class purityReportViewController {
                 }
                 catch (IOException e) {
                     e.printStackTrace();
-                    //System.out.println(e.getMessage());
                 }
             }
         });

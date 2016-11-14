@@ -28,6 +28,8 @@ public class WaterApplication {
     private static List<Report> reportList = new ArrayList<>();
     private static Map<Integer, PurityReport> purityreports = new HashMap<>();
     private static List<PurityReport> purityreportList = new ArrayList<>();
+    private static int reportNumSize = reportList.size();
+    private static int purityNumSize = purityreportList.size();
 
     /**
      * Add a new user to user list
@@ -40,6 +42,13 @@ public class WaterApplication {
         users.put(username,newUser);
     }
 
+    public static int getReportNumSize() {
+        return reportNumSize;
+    }
+
+    public static int getPurityNumSize() {
+        return purityNumSize;
+    }
     /**
      * Add a new report to report list
      * @param report  report to be added
