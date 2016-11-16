@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by bigjohnlin on 10/24/2016.
+ * Purity Report class
  */
 public class PurityReport extends Report {
     private int virusPPM;

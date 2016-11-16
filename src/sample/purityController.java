@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by bigjohnlin on 10/24/2016.
+ * Controller to manage purity application
  */
 public class purityController {
     @FXML
@@ -69,6 +69,7 @@ public class purityController {
     /**
      * initialize the Purity Report with automatic generated info of current user
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
         WaterApplication persist = WaterApplication.loadWaterApplication();
@@ -91,8 +92,8 @@ public class purityController {
         if (isInputValid()) {
             reportNum++;
             String title = "Report " + reportNum;
-            String descrip = descriptionFormatter();
-            Location location = new Location(latitude, longitude, lat.getText() + "," + lon.getText(), title, descrip);
+            String description = descriptionFormatter();
+            Location location = new Location(latitude, longitude, lat.getText() + "," + lon.getText(), title, description);
             PurityReport pureReport = new PurityReport(location);
             pureReport.setUserProfile(profile);
             pureReport.setDateAndTime(date);

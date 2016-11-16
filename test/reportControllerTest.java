@@ -1,17 +1,17 @@
-import org.junit.Before;
 import org.junit.Test;
 import sample.reportController;
 
 import static org.junit.Assert.*;
 
-//John
-
+/**
+ * Test Case for Report Controller
+ */
 public class reportControllerTest {
-    @Before
-    public void setUp() throws Exception {
 
-    }
-
+    /**
+     * method to validate the latitude for True
+     * @throws Exception for throw
+     */
     @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLatTestTrue() throws Exception {
@@ -21,11 +21,19 @@ public class reportControllerTest {
         assertTrue(reportController.validateLat("-45"));
         assertTrue(reportController.validateLat("45"));
     }
+    /**
+     * method to validate the latitude for Exception
+     * @throws Exception for throw
+     */
     @Test (expected = IllegalArgumentException.class)
     public void validateLatTestException() throws Exception {
         reportController.validateLat("");
         reportController.validateLat(null);
     }
+    /**
+     * method to validate the latitude for False
+     * @throws Exception for throw
+     */
     @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLatTestFalse() throws Exception {

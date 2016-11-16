@@ -79,6 +79,11 @@ public class registrationController {
         }
     }
 
+    /**
+     * Method to determine which account type is active
+     * @param name of the account type
+     * @return the enum accoun type
+     */
     public static AccountType determineAccountType(String name) {
         if ("User".equals(name)) {
             return AccountType.US;

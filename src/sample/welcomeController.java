@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class to manage welcome screen
+ */
 public class welcomeController {
     @FXML
     private Button register;

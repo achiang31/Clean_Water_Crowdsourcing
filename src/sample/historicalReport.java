@@ -19,15 +19,25 @@ public class historicalReport extends Application {
     final int months = 12;
     private final int[] month = new int[months];
 
-    private final Integer yea;
+    private final Integer year;
     private final Map<Integer, Integer> map;
 
+    /**
+     * Set the account type of current user operating the application
+     * @param year year of report
+     * @param loc location of report
+     * @param a String representation of report
+     * @param map of results in report
+     */
     @SuppressWarnings("AssignmentToCollectionOrArrayFieldFromParameter")
-    public historicalReport (Integer yea, Location loc, String a, Map<Integer, Integer> map) {
-        this.yea = yea;
+    public historicalReport (Integer year, Location loc, String a, Map<Integer, Integer> map) {
+        this.year = year;
         this.map = map;
     }
 
+    /**
+     * setData for the historical report
+     */
     public void setData() {
         for (int a = 0; a < month.length; a++) {
             month[a] = 0;
@@ -52,7 +62,7 @@ public class historicalReport extends Application {
         xAxis.setLabel("Month");
         yAxis.setLabel("PPM");
         XYChart.Series series1 = new XYChart.Series<String, Integer>();
-        series1.setName(yea.toString());
+        series1.setName(year.toString());
         for (int i = 0; i < months; i++) {
             series1.getData().add(new XYChart.Data(names[i], month[i]));
         }
@@ -63,7 +73,10 @@ public class historicalReport extends Application {
     }
 
 
-
+    /**
+     * main function to run and launch the historical report
+     * @param args argument
+     */
     public static void main(String[] args) {
         launch(args);
     }

@@ -12,7 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * Controller for an uneditable Purity Report
+ */
 public class uneditablePurityReportController {
     @FXML
     private Label reporter;

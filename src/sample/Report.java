@@ -108,7 +108,7 @@ public class Report {
     }
 
     /**
-     * set the typen of the report
+     * get the type of the report
      * @return type in the report
      */
     public Type getType() {

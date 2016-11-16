@@ -2,6 +2,9 @@ package sample;
 
 import java.util.Objects;
 
+/**
+ * Enum class for Account Type
+ */
 public enum AccountType {
 
     US ("User", "US"),

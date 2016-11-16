@@ -1,23 +1,16 @@
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import sample.reportController;
 
 import static org.junit.Assert.*;
 
-//Alan
-
+/**
+ * Report Controller Test Class 2
+ */
 public class reportControllerTest2 {
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
+    /**
+     * method to validate the longitude for True
+     * @throws Exception for throw
+     */
     @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLongTestTrue() throws Exception {
@@ -33,17 +26,28 @@ public class reportControllerTest2 {
         assertTrue(reportController.validateLong("75"));
         assertTrue(reportController.validateLong("-75"));
     }
+    /**
+     * method to validate the latitude for Exception
+     * @throws Exception for throw
+     */
     @Test (expected = IllegalArgumentException.class)
     public void validateLongTestIllegal() throws Exception {
         reportController.validateLong(null);
         reportController.validateLong("");
     }
+    /**
+     * method to validate the latitude for NumberFormat
+     * @throws Exception for throw
+     */
     @Test (expected = NumberFormatException.class)
     public void validateLongTestFormal() throws Exception {
         reportController.validateLong("lololol");
         reportController.validateLong("Hiryuugekizokushintenraihou");
     }
-
+    /**
+     * method to validate the latitude for False
+     * @throws Exception for throw
+     */
     @SuppressWarnings("FeatureEnvy")
     @Test
     public void validateLongTestFalse() throws Exception {

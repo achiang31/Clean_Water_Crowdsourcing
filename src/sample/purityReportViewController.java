@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller to manage the view of Purity Reports
+ */
 public class purityReportViewController {
     @FXML
     private ListView<PurityReport> listPurityReports;

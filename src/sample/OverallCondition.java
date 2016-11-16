@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by bigjohnlin on 10/17/2016.
+ * Enum class for overall condition of water
  */
 public enum OverallCondition {
     SAFE("SAFE"), UNSAFE("UNSAFE"), TREATABLE("TREATABLE");

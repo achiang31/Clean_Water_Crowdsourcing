@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 @SuppressWarnings("UtilityClass")
 public class SQLiteJDBC
 {
+    /**
+     * Main method for SQLite
+     * @param args argument
+     */
     public static void main( String args[] )
     {
         Connection c = null;

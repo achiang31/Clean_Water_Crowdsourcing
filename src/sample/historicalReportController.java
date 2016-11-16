@@ -80,12 +80,6 @@ public class historicalReportController implements Initializable {
         loc.getItems().removeAll(loc.getItems());
         loc.getItems().addAll(allLocs);
     }
-    /**
-     * Set the username to that of current user operating the application
-     * @param _username username of current user
-     */
-    public static void setUsername(String _username) {
-    }
 
     /**
      * Handle when "plot" button is pressed --> display historical report of
@@ -95,7 +89,7 @@ public class historicalReportController implements Initializable {
      */
 
     @FXML
-    private void showGraph(ActionEvent event) throws IOException {
+    private void showGraph(ActionEvent event) {
         if (account == MN) {
             Stage stage = new Stage();
             int selectedYear = year.getSelectionModel().getSelectedItem();

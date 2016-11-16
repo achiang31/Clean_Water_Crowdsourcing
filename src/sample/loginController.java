@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by bigjohnlin on 9/18/2016.
+ * Login Controller that gives functionality of login application
  */
 public class loginController {
     @FXML

@@ -42,14 +42,6 @@ public class applicationController {
     @FXML
     private Button availabilityButton;
 
-    @FXML
-    private Button createPurityReport;
-
-    @FXML
-    private Button viewPurityReport;
-
-    @FXML
-    private Button callHistoricalReport;
 
     private static String username;
     private static AccountType account;
@@ -62,6 +54,7 @@ public class applicationController {
     @FXML
     private void editProfileAction(ActionEvent event) throws IOException {
         profileController.setUsername(username);
+        //noinspection ChainedMethodCall
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent application = FXMLLoader.load(getClass().getResource("profile.fxml"));
         Stage stage = new Stage();
@@ -187,7 +180,6 @@ public class applicationController {
 
     @FXML
     private void callHistRep(ActionEvent event) throws IOException {
-        historicalReportController.setUsername(username);
         historicalReportController.setAccount(account);
         ((Node) (event.getSource())).getScene().getWindow().hide();
         Parent historyReport = FXMLLoader.load(getClass().getResource("historicalReport.fxml"));
@@ -212,35 +204,5 @@ public class applicationController {
     public static void setAccount(AccountType _account){ account = _account; }
 
 
-
-    public void saveApplicationController() {
-        try {
-            try (PrintWriter out = new PrintWriter(new File("ACdata.json"))) {
-                Gson gs = new Gson();
-                String gson = gs.toJson(this);
-                out.println(gson);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public static applicationController loadApplicationController() {
-        try {
-            try (BufferedReader br = new BufferedReader(new FileReader("ACdata.json"))) {
-                Gson gs = new Gson();
-                File loading = new File("ACdata.json");
-                FileInputStream fis = new FileInputStream(loading);
-                byte[] data = new byte[(int) loading.length()];
-                fis.read(data);
-                fis.close();
-                String str = new String(data, "UTF-8");
-                return gs.fromJson(str, applicationController.class);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(applicationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 }
 

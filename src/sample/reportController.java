@@ -66,8 +66,9 @@ public class reportController {
     private RadioButton conditionButton;
 
     /**
-     * initialize the Report with automoatic generated info of current user
+     * initialize the Report with automatic generated info of current user
      */
+    @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
         WaterApplication persist = WaterApplication.loadWaterApplication();
@@ -90,8 +91,8 @@ public class reportController {
         if (isInputValid()) {
             reportNum++;
             String title = "Report " + reportNum;
-            String descrip = descriptionFormatter();
-            Location location = new Location(latitude, longitude, loc.getText(), title, descrip);
+            String description = descriptionFormatter();
+            Location location = new Location(latitude, longitude, loc.getText(), title, description);
             Report report = new Report(location);
             report.setUserProfile(profile);
             report.setDateAndTime(date);
@@ -161,6 +162,11 @@ public class reportController {
         return errorMessageStr.isEmpty();
     }
 
+    /**
+     * method to validate the latitude
+     * @param lat latitude
+     * @return boolean if valid latitude
+     */
     @SuppressWarnings("MagicNumber")
     public static boolean validateLat(String lat) {
         if ((lat == null) || "".equals(lat)) {
@@ -171,6 +177,11 @@ public class reportController {
 
     }
 
+    /**
+     * method to validate the longitude
+     * @param  lon longitude
+     * @return boolean if valid longitude
+     */
     @SuppressWarnings("MagicNumber")
     public static boolean validateLong(String lon) {
         if ((lon == null) || "".equals(lon)) {
@@ -207,10 +218,10 @@ public class reportController {
 
     private String descriptionFormatter() {
         String reporter = profile.getFirstName() + " " + profile.getLastName();
-        String descrip = reporter + " submitted this report on: " + date + "\n";
-        descrip += "Water type: " + typeButton.getText() + "\n";
-        descrip += "Water condition: " + conditionButton.getText();
-        return descrip;
+        String description = reporter + " submitted this report on: " + date + "\n";
+        description += "Water type: " + typeButton.getText() + "\n";
+        description += "Water condition: " + conditionButton.getText();
+        return description;
     }
 }
 

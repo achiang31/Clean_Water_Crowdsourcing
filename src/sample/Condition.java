@@ -1,8 +1,8 @@
 package sample;
 
 /**
- * Created by bigjohnlin on 10/17/2016.
- */
+ * Enum class for Condition of water
+ * */
 public enum Condition {
     CLEAR("CLEAR"), DIRTY("DIRTY"), TREATABLE("TREATABLE");
 

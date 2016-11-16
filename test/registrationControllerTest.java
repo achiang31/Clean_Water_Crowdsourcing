@@ -1,15 +1,15 @@
-import org.junit.Before;
 import org.junit.Test;
 import sample.AccountType;
 import sample.registrationController;
 import static org.junit.Assert.*;
 
-//Xingxing
-
+/**
+ * test case for registraction controller
+ */
 public class registrationControllerTest {
-    @Before
-    public void setUp() {
-    }
+    /**
+     * testing the account type
+     */
     @SuppressWarnings("FeatureEnvy")
     @Test
     public void testAccountType() {

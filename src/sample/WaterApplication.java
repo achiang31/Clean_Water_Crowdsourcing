@@ -41,11 +41,17 @@ public class WaterApplication {
         User newUser = new User(accountType, username, password);
         users.put(username,newUser);
     }
-
+    /**
+     * method to get the report Num size
+     * @return int of current report number
+     */
     public static int getReportNumSize() {
         return reportNumSize;
     }
-
+    /**
+     * method to get the purity report Num size
+     * @return int of Purity report number size
+     */
     public static int getPurityNumSize() {
         return purityNumSize;
     }
@@ -112,9 +118,15 @@ public class WaterApplication {
      * @return List of purity reports <reportNum, Report> of application
      */
     public static List<PurityReport> getPurityreportList() { return purityreportList; }
-
+    /**
+     * create an instance of the water application
+     * @return Waterapplication instance
+     */
     public static WaterApplication getInstance() { return instance; }
 
+    /**
+     * Save the data of water application into a gson file
+     */
     public void saveWaterApplication() {
         try {
             try (PrintWriter out = new PrintWriter(new File("WAdata.json"))) {
@@ -126,7 +138,10 @@ public class WaterApplication {
             Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * loading that has persistence
+     * @return Water Application saved in file
+     */
     public static WaterApplication loadWaterApplication() {
         try {
             try (BufferedReader br = new BufferedReader(new FileReader("WAdata.json"))) {

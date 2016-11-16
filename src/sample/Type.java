@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by bigjohnlin on 9/12/2016.
+ * Enum class for Type of Water
  */
 public enum Type {
     POTABLE("POTABLE"), BOTTLED("BOTTLED");
