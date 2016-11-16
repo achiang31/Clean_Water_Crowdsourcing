@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by Alex on 10/1/16.
+ * Water Application Class
  */
 public class WaterApplication {
     //fields cannot be final or else persistence breaks b/c gson cannot handle
@@ -80,7 +80,8 @@ public class WaterApplication {
      */
     public static void setProfile(String username, Profile profile) {
         if (users.get(username) != null){
-            users.get(username).setProfile(profile);
+            User us = users.get(username);
+            us.setProfile(profile);
         }
     }
 
@@ -130,12 +131,13 @@ public class WaterApplication {
     public void saveWaterApplication() {
         try {
             try (PrintWriter out = new PrintWriter(new File("WAdata.json"))) {
-                Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
-                String gson = gs.toJson(this);
+                @SuppressWarnings("ChainedMethodCall") Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
+                String gson = gs.toJson(this); //Default Persist Managing - Alan look at
                 out.print(gson);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger log = Logger.getLogger(WaterApplication.class.getName());
+            log.log(Level.SEVERE, null, ex);
         }
     }
     /**
@@ -145,7 +147,7 @@ public class WaterApplication {
     public static WaterApplication loadWaterApplication() {
         try {
             try (BufferedReader br = new BufferedReader(new FileReader("WAdata.json"))) {
-                Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
+                @SuppressWarnings("ChainedMethodCall") Gson gs = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).create(); //default way to construct Gson builder
                 File loading = new File("WAdata.json");
                 FileInputStream fis = new FileInputStream(loading);
                 byte[] data = new byte[(int) loading.length()];
@@ -155,7 +157,8 @@ public class WaterApplication {
                 return gs.fromJson(str, WaterApplication.class);
             }
         } catch (IOException ex) {
-            Logger.getLogger(WaterApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger log = Logger.getLogger(WaterApplication.class.getName());
+            log.log(Level.SEVERE, null, ex);
         }
         return null;
     }

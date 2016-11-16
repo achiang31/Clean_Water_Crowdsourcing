@@ -13,9 +13,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 
 /**
- * Created by Alex on 10/2/16.
+ * Profile Controller
  */
 public class profileController {
 
@@ -62,14 +63,16 @@ public class profileController {
     @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
-        Profile profile = WaterApplication.getUsers().get(username).getProfile();
+        Map<String, User> prop = WaterApplication.getUsers();
+        User user = prop.get(username);
+        Profile profile = user.getProfile();
         if (profile != null) {
             firstName.setText(profile.getFirstName());
             lastName.setText(profile.getLastName());
             emailAddress.setText(profile.getEmailAddress());
             ID.setText(profile.getID());
             homeAddress.setText(profile.getHomeAddress());
-            month.setText(Integer.toString(profile.getBirthday().getMonth() + 1));
+            month.setText(Integer.toString(profile.getBirthday().getMonth() + 1)); //Alex does this
             day.setText(Integer.toString(profile.getBirthday().getDate()));
             year.setText(Integer.toString(profile.getBirthday().getYear() + 1900));
         }
@@ -81,7 +84,7 @@ public class profileController {
      * @param event Clicking "OK" button
      * @throws IOException when corresponding .fxml file does not exist
      */
-    @SuppressWarnings("FeatureEnvy")
+    @SuppressWarnings({"FeatureEnvy", "ChainedMethodCall"})
     @FXML
     private void OKAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -89,7 +92,8 @@ public class profileController {
             Profile profile = new Profile(firstName.getText(), lastName.getText(), emailAddress.getText(),
                     ID.getText(), homeAddress.getText(), birthday);
             WaterApplication.setProfile(username, profile);
-            WaterApplication.getInstance().saveWaterApplication();
+            WaterApplication instance = WaterApplication.getInstance();
+            instance.saveWaterApplication();
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
@@ -105,6 +109,7 @@ public class profileController {
      * @param event Clicking "Cancel" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         applicationController.setUsername(username);
@@ -123,19 +128,27 @@ public class profileController {
      */
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if ((firstName.getText() == null) || firstName.getText().isEmpty()) {
+        String first = firstName.getText();
+        String last = lastName.getText();
+        String email = emailAddress.getText();
+        String home = homeAddress.getText();
+        String mon = month.getText();
+        String y = year.getText();
+        String d = day.getText();
+        String id = ID.getText();
+        if ((firstName.getText() == null) || first.isEmpty()) {
             errorMessageStr += "Empty first name!\n";
-        } else if ((lastName.getText() == null) || lastName.getText().isEmpty()) {
+        } else if ((lastName.getText() == null) || last.isEmpty()) {
             errorMessageStr += "Empty last name!\n";
-        } else if ((emailAddress.getText() == null) || emailAddress.getText().isEmpty()) {
+        } else if ((emailAddress.getText() == null) || email.isEmpty()) {
             errorMessageStr += "Empty email address!\n";
-        } else if ((ID.getText() == null) || ID.getText().isEmpty()) {
+        } else if ((ID.getText() == null) || id.isEmpty()) {
             errorMessageStr += "Empty ID!\n";
-        } else if ((homeAddress.getText() == null) || homeAddress.getText().isEmpty()) {
+        } else if ((homeAddress.getText() == null) || home.isEmpty()) {
             errorMessageStr += "Empty home address!\n";
-        } else if ((month.getText() == null) || month.getText().isEmpty()
-                || (day.getText() == null) || day.getText().isEmpty()
-                || (year.getText() == null) || year.getText().isEmpty()) {
+        } else if ((month.getText() == null) || mon.isEmpty()
+                || (day.getText() == null) || d.isEmpty()
+                || (year.getText() == null) || y.isEmpty()) {
             errorMessageStr += "Empty birthday!\n";
         }
         try {

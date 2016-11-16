@@ -17,9 +17,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by xingxing on 10/5/16.
+ * Report Controller
  */
 public class reportController {
     @FXML
@@ -72,11 +74,15 @@ public class reportController {
     @FXML
     private void initialize() {
         WaterApplication persist = WaterApplication.loadWaterApplication();
-        reportNum = persist.getPurityreportList().size();
-        profile = WaterApplication.getUsers().get(username).getProfile();
+        List<PurityReport> list = persist.getPurityreportList();
+        reportNum = list.size();
+        Map<String, User> map = persist.getUsers();
+        User us = map.get(username);
+        profile = us.getProfile();
         reporter.setText(profile.getFirstName() + " " + profile.getLastName());
         reportNumber.setText(Integer.toString(reportNum + 1));
-        date = Calendar.getInstance().getTime();
+        Calendar cal = Calendar.getInstance();
+        date = cal.getTime();
         dateAndTime.setText(date.toString());
     }
     /**
@@ -85,7 +91,7 @@ public class reportController {
      * @param event Clicking "submitButton" button
      * @throws IOException when corresponding .fxml file does not exist
      */
-    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod"})
+    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod", "ChainedMethodCall"})
     @FXML
     private void submitAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
@@ -97,8 +103,10 @@ public class reportController {
             report.setUserProfile(profile);
             report.setDateAndTime(date);
             report.setReportNum(reportNum);
-            report.setType(typeButton.getText().toUpperCase());
-            report.setCondition((conditionButton.getText().toUpperCase()));
+            String type = typeButton.getText();
+            report.setType(type.toUpperCase());
+            String cond = conditionButton.getText();
+            report.setCondition((cond.toUpperCase()));
             WaterApplication app = WaterApplication.getInstance();
             app.addReport(report);
             app.saveWaterApplication();
@@ -118,13 +126,14 @@ public class reportController {
     @SuppressWarnings("MagicNumber")
     private boolean isInputValid() {
         String errorMessageStr = "";
+        String locText = loc.getText();
         typeButton  = (RadioButton) TypeGroup.getSelectedToggle();
         conditionButton = (RadioButton) ConditionGroup.getSelectedToggle();
         if (typeButton == null) {
             errorMessageStr += "Must select a type!\n";
         } else if (conditionButton == null) {
             errorMessageStr += "Must select a condition!\n";
-        } else if ((loc.getText() == null) || loc.getText().isEmpty()) {
+        } else if ((loc.getText() == null) || locText.isEmpty()) {
             errorMessageStr += "Empty location!\n";
         } else {
             String location = loc.getText();
@@ -196,6 +205,7 @@ public class reportController {
      * @param event Clicking "cancel" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         applicationController.setUsername(username);

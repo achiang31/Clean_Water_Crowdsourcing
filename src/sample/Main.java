@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 /**
  * main function to run the application
  */
+@SuppressWarnings("ChainedMethodCall")
 public class Main extends Application {
 
     @SuppressWarnings("MagicNumber")

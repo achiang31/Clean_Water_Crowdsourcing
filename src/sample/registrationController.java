@@ -8,16 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * Created by Zihan Xu on 10/1/16.
+ * Registration Controller
  */
 public class registrationController {
     @FXML
@@ -58,12 +55,13 @@ public class registrationController {
      * @param event Clicking "Register" button
      * @throws IOException when corresponding .fxml file does not exist
      */
-    @SuppressWarnings("FeatureEnvy")
+    @SuppressWarnings({"FeatureEnvy", "ChainedMethodCall"})
     @FXML
     private void registerAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
             profileController.setUsername(username.getText());
-            String accountType = accountTypeBox.getSelectionModel().getSelectedItem();
+            SingleSelectionModel<String> acc = accountTypeBox.getSelectionModel();
+            String accountType = acc.getSelectedItem();
             AccountType account = determineAccountType(accountType);
             applicationController.setAccount(account);
             WaterApplication app = WaterApplication.getInstance();
@@ -100,6 +98,7 @@ public class registrationController {
      * @param event Clicking "Cancel" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -117,15 +116,20 @@ public class registrationController {
      */
     private boolean isInputValid() {
         String errorMessage = "";
+        String user = username.getText();
+        String pw = password.getText();
+        String cpw = confirmPassword.getText();
+        Map<String, User> usList = WaterApplication.getUsers();
         if (accountTypeBox.getValue() == null) {
             errorMessage += "Empty account type!\n";
-        } else if ((username.getText() == null) || username.getText().isEmpty()) {
+        } else if ((username.getText() == null) || user.isEmpty()) {
             errorMessage += "Not a valid username!\n";
-        } else if ((WaterApplication.getUsers() != null) && WaterApplication.getUsers().containsKey(username.getText())) {
+        } else if ((WaterApplication.getUsers() != null) &&
+                usList.containsKey(user)) {
             errorMessage += "Username already exists!\n";
-        } else if ((password.getText() == null) || password.getText().isEmpty()) {
+        } else if ((password.getText() == null) || pw.isEmpty()) {
             errorMessage += "Not a valid password!\n";
-        } else if (!password.getText().equals(confirmPassword.getText())) {
+        } else if (!pw.equals(cpw)) {
             errorMessage += "Passwords don't match!\n";
         }
         if (errorMessage.isEmpty()) {

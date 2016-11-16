@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -40,14 +42,16 @@ public class purityReportViewController {
         ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
         listPurityReports.setItems(obsReportList);
         listPurityReports.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @SuppressWarnings("AssignmentToStaticFieldFromInstanceMethod")
+            @SuppressWarnings({"AssignmentToStaticFieldFromInstanceMethod", "ChainedMethodCall"})
             @Override
             public void handle(MouseEvent mouseEvent) {
                 try {
-                    report = listPurityReports.getSelectionModel().getSelectedItem();
+                    MultipleSelectionModel<PurityReport> model = listPurityReports.getSelectionModel();
+                    report = model.getSelectedItem();
                     reportNum = report.getReportNum();
                     ((Node) (mouseEvent.getSource())).getScene().getWindow().hide();
-                    Parent uneditablePurityReport = FXMLLoader.load(getClass().getResource("uneditablePurityReport.fxml"));
+                    Parent uneditablePurityReport =
+                            FXMLLoader.load(getClass().getResource("uneditablePurityReport.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(uneditablePurityReport);
                     stage.setScene(scene);
@@ -67,6 +71,7 @@ public class purityReportViewController {
      * @param event Clicking "goBack" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void goBackAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();

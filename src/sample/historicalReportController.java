@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 import static sample.AccountType.MN;
 
 /**
- * Created by biggerSean on 11/1/2016.
+ * Historical Report Controller
  */
 public class historicalReportController implements Initializable {
     @FXML
@@ -49,7 +49,7 @@ public class historicalReportController implements Initializable {
     private static final ObservableMap<Integer, Integer> contaminationMap = FXCollections.observableHashMap();
     private static AccountType account;
 
-    @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
+    @SuppressWarnings({"FeatureEnvy", "MagicNumber", "ChainedMethodCall"})
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //get all the valid years//
@@ -71,23 +71,27 @@ public class historicalReportController implements Initializable {
         Collection<Location> allLocs = new ArrayList<>();
         validReport.stream().filter(aValidReport ->
                 !allLocs.contains(aValidReport.getLocation())).forEach(aValidReport ->
-                allLocs.add(aValidReport.getLocation()));
+                allLocs.add(aValidReport.getLocation())); // cannot deal with Historical report format
         //get all the valid locations//
-        VorC.getItems().removeAll(VorC.getItems());
-        VorC.getItems().addAll("Virus", "Contamination");
-        year.getItems().removeAll(year.getItems());
-        year.getItems().addAll(allYears);
-        loc.getItems().removeAll(loc.getItems());
-        loc.getItems().addAll(allLocs);
+        ObservableList<String> list = VorC.getItems();
+        list.removeAll(VorC.getItems());
+        ObservableList<String> paramList = VorC.getItems();
+        paramList.addAll("Virus", "Contamination");
+        ObservableList<Integer> time = year.getItems();
+        time.removeAll(year.getItems());
+        time.addAll(allYears);
+        ObservableList<Location> locList =loc.getItems();
+        locList.removeAll(loc.getItems());
+        locList.addAll(allLocs);
     }
 
     /**
      * Handle when "plot" button is pressed --> display historical report of
      * selected year, location, and contamination type
      * @param event Clicking "plot" button
-     * @throws IOException when corresponding .fxml file does not exist
      */
 
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void showGraph(ActionEvent event) {
         if (account == MN) {
@@ -96,15 +100,20 @@ public class historicalReportController implements Initializable {
             if((year.getValue() != null) && (loc.getValue() != null)) {
                 List<PurityReport> reportList = WaterApplication.getPurityreportList();
                 ObservableList<PurityReport> obsReportList = FXCollections.observableList(reportList);
-                reportList.stream().filter(purityReport -> (purityReport.getDateAndTime().getYear() + 1900) == selectedYear).forEach(purityReport -> {
+                reportList.stream().filter(purityReport -> (purityReport.getDateAndTime().getYear() + 1900)
+                        == selectedYear).forEach(purityReport -> {
                     map.get(purityReport.getDateAndTime().getMonth()).add(purityReport);
                     createVirusMap();
                     createContaminationMap();
                 });
                 if ("Virus".equals(VorC.getSelectionModel().getSelectedItem())) {
-                    new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), virusMap).start(stage);
+                    new historicalReport(year.getSelectionModel().getSelectedItem(),
+                            loc.getSelectionModel().getSelectedItem(),
+                            VorC.getSelectionModel().getSelectedItem(), virusMap).start(stage);
                 } else {
-                   new historicalReport(year.getSelectionModel().getSelectedItem(), loc.getSelectionModel().getSelectedItem(), VorC.getSelectionModel().getSelectedItem(), contaminationMap).start(stage);
+                   new historicalReport(year.getSelectionModel().getSelectedItem(),
+                           loc.getSelectionModel().getSelectedItem(),
+                           VorC.getSelectionModel().getSelectedItem(), contaminationMap).start(stage);
                 }
             } else {
                 plzSelect.setText("Please select year and location");
@@ -122,7 +131,8 @@ public class historicalReportController implements Initializable {
                 int average = averageVirus(list);
                 virusMap.put(month, average);
             } else if (list.size() == 1) {
-                virusMap.put(month, list.get(0).getVirusPPM());
+                PurityReport report = list.get(0);
+                virusMap.put(month, report.getVirusPPM());
             } else {
                 virusMap.put(month, 0);
             }
@@ -137,7 +147,8 @@ public class historicalReportController implements Initializable {
                 int average = averageContamination(list);
                 contaminationMap.put(month, average);
             } else if (list.size() == 1) {
-                contaminationMap.put(month, list.get(0).getVirusPPM());
+                PurityReport report = list.get(0);
+                contaminationMap.put(month, report.getVirusPPM());
             } else {
                 contaminationMap.put(month, 0);
             }
@@ -167,6 +178,7 @@ public class historicalReportController implements Initializable {
      * @param event Clicking "goBack" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void goBackAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();

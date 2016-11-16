@@ -1,7 +1,5 @@
 package sample;
 
-
-import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,20 +10,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * Created by bigjohnlin on 9/18/2016.
+ * Application Controller
  */
+@SuppressWarnings("ChainedMethodCall")
 public class applicationController {
     @FXML
     private Button editProfile;
@@ -123,7 +114,8 @@ public class applicationController {
         }
     }
     /**
-     * Handle when "ViewPurityReports" button is pressed --> end current user session --> display view of PurityReports screen
+     * Handle when "ViewPurityReports" button is pressed -->
+     * end current user session --> display view of PurityReports screen
      * @param event Clicking "viewPurityReports" button
      * @throws IOException when corresponding .fxml file does not exist
      */
@@ -164,7 +156,8 @@ public class applicationController {
     }
 
     /**
-     * Handle when "viewAvailabilityReport" button is pressed --> end current user session --> display view of availability Reports screen
+     * Handle when "viewAvailabilityReport" button is pressed -->
+     * end current user session --> display view of availability Reports screen
      * @param event Clicking "createReports" button
      * @throws IOException when corresponding .fxml file does not exist
      */

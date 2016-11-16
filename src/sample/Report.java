@@ -3,7 +3,7 @@ package sample;
 import java.util.Date;
 
 /**
- * Created by xingxing on 10/5/16.
+ * Report Class
  */
 public class Report {
     private Profile userProfile;

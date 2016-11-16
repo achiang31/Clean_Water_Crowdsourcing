@@ -1,7 +1,7 @@
 package sample;
 
 /**
- * Created by Alex on 10/19/16.
+ * Location Class
  */
 public class Location {
 

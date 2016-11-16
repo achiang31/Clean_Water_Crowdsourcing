@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Controller for an uneditable Purity Report
@@ -54,13 +56,18 @@ public class uneditablePurityReportController {
     @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
-        report = WaterApplication.getPurityreports().get(purityReportViewController.getReportNum());
+        List<PurityReport> purity = WaterApplication.getPurityreportList();
+        int num = purityReportViewController.getReportNum();
+        report = purity.get(num);
         Profile profile = report.getProfile();
-        loc.setText(report.getLocation().getStrLoc());
+        Location t = report.getLocation();
+        loc.setText(t.getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
         reportNumber.setText(Integer.toString(report.getReportNum()));
-        dateAndTime.setText(report.getDateAndTime().toString());
-        condition.setText(report.getOverallCondition().toString());
+        Date date = report.getDateAndTime();
+        dateAndTime.setText(date.toString());
+        OverallCondition cond = report.getOverallCondition();
+        condition.setText(cond.toString());
         virus.setText(Integer.toString(report.getVirusPPM()));
         conditionPPM.setText(Integer.toString(report.getContaminatePPM()));
     }
@@ -70,6 +77,7 @@ public class uneditablePurityReportController {
      * @param event Clicking "goBack" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void goBackAction(ActionEvent event) throws IOException {
         reportViewController.setReport(report);

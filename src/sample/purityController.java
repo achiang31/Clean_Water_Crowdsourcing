@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller to manage purity application
@@ -73,11 +75,15 @@ public class purityController {
     @FXML
     private void initialize() {
         WaterApplication persist = WaterApplication.loadWaterApplication();
-        reportNum = persist.getPurityreportList().size();
-        profile = WaterApplication.getUsers().get(username).getProfile();
+        List<PurityReport> list = persist.getPurityreportList();
+        reportNum = list.size();
+        Map<String, User> map = WaterApplication.getUsers();
+        User user = map.get(username);
+        profile = user.getProfile();
         reporter.setText(profile.getFirstName() + " " + profile.getLastName());
         reportNumber.setText(Integer.toString(reportNum + 1));
-        date = Calendar.getInstance().getTime();
+        Calendar instance = Calendar.getInstance();
+        date = instance.getTime();
         dateAndTime.setText(date.toString());
     }
     /**
@@ -86,20 +92,22 @@ public class purityController {
      * @param event Clicking "submitAction" button
      * @throws IOException when corresponding .fxml file does not exist
      */
-    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod"})
+    @SuppressWarnings({"FeatureEnvy", "AssignmentToStaticFieldFromInstanceMethod", "ChainedMethodCall"})
     @FXML
     private void submitAction(ActionEvent event) throws IOException {
         if (isInputValid()) {
             reportNum++;
             String title = "Report " + reportNum;
             String description = descriptionFormatter();
-            Location location = new Location(latitude, longitude, lat.getText() + "," + lon.getText(), title, description);
+            Location location = new Location(latitude, longitude, lat.getText() + ","
+                    + lon.getText(), title, description);
             PurityReport pureReport = new PurityReport(location);
             pureReport.setUserProfile(profile);
             pureReport.setDateAndTime(date);
             pureReport.setReportNum(reportNum);
             RadioButton conditionButton = (RadioButton) OverallConditionGroup.getSelectedToggle();
-            pureReport.setOverallCondition((conditionButton.getText().toUpperCase()));
+            String cond = conditionButton.getText();
+            pureReport.setOverallCondition((cond.toUpperCase()));
             pureReport.setConditionPPM(Integer.parseInt(contPPM.getText()));
             pureReport.setVirusPPM(Integer.parseInt(virusPPM.getText()));
             WaterApplication app = WaterApplication.getInstance();
@@ -121,7 +129,9 @@ public class purityController {
     @SuppressWarnings("MagicNumber")
     private boolean isInputValid() {
         String errorMessageStr = "";
-        if ((lat.getText() == null) || lat.getText().isEmpty()) {
+        String la = lat.getText();
+        String lo = lon.getText();
+        if ((lat.getText() == null) || la.isEmpty()) {
             errorMessageStr += "Empty latitude!\n";
         } else {
             try {
@@ -136,7 +146,7 @@ public class purityController {
             }
         }
         if (errorMessageStr.isEmpty()) {
-            if ((lon.getText() == null) || lon.getText().isEmpty()) {
+            if ((lon.getText() == null) || lo.isEmpty()) {
                 errorMessageStr += "Empty longitude!\n";
             } else {
                 try {
@@ -152,7 +162,8 @@ public class purityController {
             }
         }
         if (errorMessageStr.isEmpty()) {
-            if ((virusPPM.getText() == null) || virusPPM.getText().isEmpty()) {
+            String virusS = virusPPM.getText();
+            if ((virusPPM.getText() == null) || virusS.isEmpty()) {
                 errorMessageStr += "Empty virus PPM!\n";
             } else {
                 try {
@@ -166,7 +177,8 @@ public class purityController {
             }
         }
         if (errorMessageStr.isEmpty()) {
-            if ((contPPM.getText() == null) || contPPM.getText().isEmpty()) {
+            String contS = contPPM.getText();
+            if ((contPPM.getText() == null) || contS.isEmpty()) {
                 errorMessageStr += "Empty contaminant PPM!\n";
             } else {
                 try {
@@ -198,6 +210,7 @@ public class purityController {
      * @param event Clicking "cancel" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         applicationController.setUsername(username);

@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * Controller class to manage welcome screen
  */
+@SuppressWarnings("ChainedMethodCall")
 public class welcomeController {
     @FXML
     private Button register;

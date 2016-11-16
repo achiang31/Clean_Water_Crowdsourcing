@@ -38,19 +38,14 @@ public class loginController {
      * @param event Clicking "Login" button
      * @throws IOException when corresponding .fxml file does not exist
      */
-    @SuppressWarnings("FeatureEnvy")
+    @SuppressWarnings({"FeatureEnvy", "ChainedMethodCall"})
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         WaterApplication persistence = WaterApplication.loadWaterApplication();
-        //System.out.println(persistence.getUsers());
-        //^only for the sake of logging back in
-
-//        if (WaterApplication.getUsers() != null && WaterApplication.getUsers().containsKey(username.getText())
-//                && WaterApplication.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
-        if ((persistence.getUsers() != null) && persistence.getUsers().containsKey(username.getText())
+        if ((persistence.getUsers() != null) && persistence.getUsers().containsKey(username.getText()) //Need this for validation
                 && persistence.getUsers().get(username.getText()).getPassword().equals(password.getText())) {
             applicationController.setUsername(username.getText());
-            applicationController.setAccount(persistence.getUsers().get(username.getText()).getAccountType()); //need to fix this bad design principle
+            applicationController.setAccount(persistence.getUsers().get(username.getText()).getAccountType());
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent application = FXMLLoader.load(getClass().getResource("application.fxml"));
             Stage stage = new Stage();
@@ -68,6 +63,7 @@ public class loginController {
      * @param event Clicking "Cancel" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void cancelAction(ActionEvent event) throws IOException {
         ((Node) (event.getSource())).getScene().getWindow().hide();

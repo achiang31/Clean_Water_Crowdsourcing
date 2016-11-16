@@ -11,9 +11,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 /**
- * Created by xingxing on 10/5/16.
+ * Uneditable Report Controller
  */
 public class uneditableReportController {
     @FXML
@@ -48,14 +50,20 @@ public class uneditableReportController {
     @SuppressWarnings("FeatureEnvy")
     @FXML
     private void initialize() {
-        report = WaterApplication.getReports().get(reportViewController.getReportNum());
+        Map<Integer, Report> reports = WaterApplication.getReports();
+        int num = reportViewController.getReportNum();
+        report = reports.get(num);
         Profile profile = report.getProfile();
-        loc.setText(report.getLocation().getStrLoc());
+        Location land = report.getLocation();
+        loc.setText(land.getStrLoc());
         reporter.setText(profile.getFirstName() + profile.getLastName());
-        reportNumber.setText(Integer.toString(reportViewController.getReportNum()));
-        dateAndTime.setText(report.getDateAndTime().toString());
-        type.setText(report.getType().toString());
-        condition.setText(report.getCondition().toString());
+        reportNumber.setText(Integer.toString(num));
+        Date date = report.getDateAndTime();
+        dateAndTime.setText(date.toString());
+        Type t = report.getType();
+        type.setText(t.toString());
+        Condition con = report.getCondition();
+        condition.setText(con.toString());
     }
 
     /**
@@ -63,6 +71,7 @@ public class uneditableReportController {
      * @param event Clicking "goBack" button
      * @throws IOException when corresponding .fxml file does not exist
      */
+    @SuppressWarnings("ChainedMethodCall")
     @FXML
     private void goBackAction(ActionEvent event) throws IOException {
         reportViewController.setReport(report);

@@ -1,5 +1,6 @@
 package sample;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -10,13 +11,14 @@ import javafx.stage.Stage;
 import java.util.Map;
 
 import static javafx.application.Application.launch;
-/**
- * Created by biggerSean on 11/1/2016.
- */
 
+/**
+ * Historical report class
+ */
 public class historicalReport extends Application {
-    private final String[] names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    final int months = 12;
+    private final String[] names = {"January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"};
+    private final  int months = 12;
     private final int[] month = new int[months];
 
     private final Integer year;
@@ -64,10 +66,12 @@ public class historicalReport extends Application {
         XYChart.Series series1 = new XYChart.Series<String, Integer>();
         series1.setName(year.toString());
         for (int i = 0; i < months; i++) {
-            series1.getData().add(new XYChart.Data(names[i], month[i]));
+            ObservableList data = series1.getData();
+            data.add(new XYChart.Data(names[i], month[i]));
         }
         Scene scene = new Scene(bc, 800, 600);
-        bc.getData().addAll(series1);
+        ObservableList data = bc.getData();
+        data.addAll(series1);
         stage.setScene(scene);
         stage.show();
     }

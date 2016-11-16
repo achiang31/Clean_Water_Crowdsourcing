@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- * Created by Alan on 11/1/2016.
+ * SQL Lite class
  */
 
 @SuppressWarnings("UtilityClass")

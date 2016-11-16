@@ -18,8 +18,9 @@ import java.util.List;
 
 
 /**
- * Created by xingxing on 10/5/16.
+ * Report View Controller
  */
+@SuppressWarnings("ChainedMethodCall")
 public class reportViewController {
     @FXML
     private ListView<Report> listReports;

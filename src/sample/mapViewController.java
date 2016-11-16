@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Created by Alex on 10/18/16.
+ * Map View Controller
  */
 public class mapViewController implements Initializable, MapComponentInitializedListener {
     @FXML
@@ -48,7 +48,7 @@ public class mapViewController implements Initializable, MapComponentInitialized
     /**
      * initialize the set up of the map with reports
      */
-    @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
+    @SuppressWarnings({"FeatureEnvy", "MagicNumber", "ChainedMethodCall"})
     @Override
     public void mapInitialized() {
         MapOptions options = new MapOptions();
@@ -57,11 +57,13 @@ public class mapViewController implements Initializable, MapComponentInitialized
         int defaultLat = 34;
         int defaultLong = -88;
         LatLong center = new LatLong(defaultLat, defaultLong);
-        if (!WaterApplication.getReportsList().isEmpty()) {
-            Location firstLoc = WaterApplication.getReportsList().get(0).getLocation();
+        List<Report> reports = WaterApplication.getReportsList();
+        if (!reports.isEmpty()) {
+            Report rep = reports.get(0);
+            Location firstLoc = rep.getLocation();
             center = new LatLong(firstLoc.getLatitude(), firstLoc.getLongitude());
         }
-        options.center(center)
+        options.center(center)          //Part of In Class MapView Code for Google Map Display
                 .zoom(9)
                 .overviewMapControl(false)
                 .panControl(false)
@@ -75,9 +77,9 @@ public class mapViewController implements Initializable, MapComponentInitialized
 
 
         // now we communicate with the model to get all the locations for markers
-        List<Report> reports = WaterApplication.getReportsList();
+        List<Report> reported = WaterApplication.getReportsList();
 
-        for (Report report : reports) {
+        for (Report report : reported) {
             Location l = report.getLocation();
             MarkerOptions markerOptions = new MarkerOptions();
             LatLong loc = new LatLong(l.getLatitude(), l.getLongitude());
