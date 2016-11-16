@@ -142,6 +142,8 @@ public class profileController {
             errorMessageStr += "Empty last name!\n";
         } else if ((emailAddress.getText() == null) || email.isEmpty()) {
             errorMessageStr += "Empty email address!\n";
+        } else if (!validateEmail(email)) {
+            errorMessageStr += "Invalid email address!\n";
         } else if ((ID.getText() == null) || id.isEmpty()) {
             errorMessageStr += "Empty ID!\n";
         } else if ((homeAddress.getText() == null) || home.isEmpty()) {
@@ -173,5 +175,23 @@ public class profileController {
      */
     public static void setUsername(String _username) {
         username = _username;
+    }
+
+    /**
+     * Validate the entered email
+     * @param email Entered by user
+     * @return If the email is valid
+     */
+    public static boolean validateEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("Cannot have null or empty email address!\n");
+        }
+        if (!email.contains("@")) {
+            return false;
+        }
+        if (!(email.charAt(email.length() - 4) == '.')) {
+            return false;
+        }
+        return true;
     }
 }
