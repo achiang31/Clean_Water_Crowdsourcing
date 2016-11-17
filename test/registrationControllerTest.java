@@ -1,6 +1,6 @@
 import org.junit.Test;
-import sample.AccountType;
-import sample.registrationController;
+import Model.AccountType;
+import Controller.registrationController;
 import static org.junit.Assert.*;
 
 /**

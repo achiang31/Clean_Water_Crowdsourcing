@@ -1,7 +1,7 @@
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sample.reportController;
+import Controller.reportController;
 
 import static org.junit.Assert.*;
 

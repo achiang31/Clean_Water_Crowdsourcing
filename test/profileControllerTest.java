@@ -1,5 +1,5 @@
 import org.junit.Test;
-import sample.profileController;
+import Controller.profileController;
 
 import static org.junit.Assert.*;
 
@@ -41,6 +41,6 @@ public class profileControllerTest {
         assertFalse(profileController.validateEmail("alex"));
         assertFalse(profileController.validateEmail("gatech.edu"));
         assertFalse(profileController.validateEmail("zihan@gmail"));
-        assertFalse(profileController.validateEmail("xu@sample.nett"));
+        assertFalse(profileController.validateEmail("xu@Main.nett"));
     }
 }
