@@ -189,12 +189,6 @@ public class profileController {
         if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("Cannot have null or empty email address!\n");
         }
-        if (!email.contains("@")) {
-            return false;
-        }
-        if (!(email.charAt(email.length() - 4) == '.')) {
-            return false;
-        }
-        return true;
+        return (email.contains("@") && email.charAt(0) != '@' && email.charAt(email.length() - 4) == '.');
     }
 }
