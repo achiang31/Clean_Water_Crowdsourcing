@@ -151,6 +151,7 @@ public class WaterApplication {
                 File loading = new File("WAdata.json");
                 FileInputStream fis = new FileInputStream(loading);
                 byte[] data = new byte[(int) loading.length()];
+                //noinspection ResultOfMethodCallIgnored
                 fis.read(data);
                 fis.close();
                 String str = new String(data, "UTF-8");
