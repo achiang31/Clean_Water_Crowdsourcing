@@ -58,7 +58,7 @@ public class uneditablePurityReportController {
     @FXML
     private void initialize() {
         List<PurityReport> purity = WaterApplication.getPurityreportList();
-        int num = purityReportViewController.getReportNum();
+        int num = purityReportViewController.getReportNum() - 1;
         report = purity.get(num);
         Profile profile = report.getProfile();
         Location t = report.getLocation();

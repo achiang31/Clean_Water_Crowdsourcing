@@ -176,7 +176,7 @@ public class applicationController {
     private void callHistRep(ActionEvent event) throws IOException {
         historicalReportController.setAccount(account);
         ((Node) (event.getSource())).getScene().getWindow().hide();
-        Parent historyReport = FXMLLoader.load(getClass().getResource("historicalReport.fxml"));
+        Parent historyReport = FXMLLoader.load((getClass().getResource("../View/historicalReport.fxml")));
         Stage stage = new Stage();
         Scene scene = new Scene(historyReport);
         stage.setScene(scene);
