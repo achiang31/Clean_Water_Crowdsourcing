@@ -3,14 +3,11 @@ import Controller.profileController;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Alex on 11/16/16.
- */
 public class profileControllerTest {
 
     /**
-     *
-     * @throws Exception
+     * Method to validate the email address for true
+     * @throws Exception for throw
      */
     @SuppressWarnings("FeatureEnvy")
     @Test
@@ -22,8 +19,8 @@ public class profileControllerTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Method to validate the email address for exception
+     * @throws Exception for throw
      */
     @Test (expected = IllegalArgumentException.class)
     public void validateLatTestException() throws Exception {
@@ -32,8 +29,8 @@ public class profileControllerTest {
     }
 
     /**
-     *
-     * @throws Exception
+     * Method to validate the email address for false
+     * @throws Exception for throw
      */
     @SuppressWarnings("FeatureEnvy")
     @Test
